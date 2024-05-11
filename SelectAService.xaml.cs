@@ -26,12 +26,14 @@ namespace DiplomKarakuyumjyan
 
         private void btnReports_Click(object sender, RoutedEventArgs e)
         {
-
+            ReportsPage page = new ReportsPage();
+            MainWindowFrame.Content = page;
         }
 
         private void btnCreatRequest_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateRequestPage page = new CreateRequestPage();
+            MainWindowFrame.Content = page;
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -52,9 +54,9 @@ namespace DiplomKarakuyumjyan
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            authorization zat = new authorization();
+            Authorization zat = new Authorization();
             zat.Show();
-            this.Close();
+            Close();
         }
     }
 }

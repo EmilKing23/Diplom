@@ -31,7 +31,7 @@ namespace DiplomKarakuyumjyan
         }
         private void dt_Tick(object sander, EventArgs e)
         {
-            authorization w = new authorization();
+            Authorization w = new Authorization();
             w.Show();
             dt.Stop();
             this.Close();

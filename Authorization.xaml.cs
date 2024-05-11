@@ -17,9 +17,9 @@ namespace DiplomKarakuyumjyan
     /// <summary>
     /// Логика взаимодействия для authorization.xaml
     /// </summary>
-    public partial class authorization : Window
+    public partial class Authorization : Window
     {
-        public authorization()
+        public Authorization()
         {
             InitializeComponent();
         }
