@@ -11,8 +11,7 @@
     <Grid>
         <Border CornerRadius="12" HorizontalAlignment="Center" >
         <Border.Background>
-            <ImageBrush ImageSource="/Images/back-image.jpg"
-                        Stretch="None"/>
+            <ImageBrush ImageSource="/Images/back-image.jpg"/>
         </Border.Background>
 
         <Border CornerRadius="11"                    

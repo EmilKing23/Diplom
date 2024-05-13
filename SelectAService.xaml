@@ -20,7 +20,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -135,7 +135,6 @@
                Margin="10"
                Grid.Row="1"
                Grid.Column="1"
-               Grid.RowSpan="2"
                Grid.ColumnSpan="2"
                x:Name="MainWindowFrame" />
     </Grid>
