@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ДипломModelContainer" CdmEntityContainer="ДипломEntities">
+    <EntitySetMapping Name="Адреса">
+      <EntityTypeMapping TypeName="ДипломModel.Адреса">
+        <MappingFragment StoreEntitySet="Адреса">
+          <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
+          <ScalarProperty Name="Города" ColumnName="Города" />
+          <ScalarProperty Name="Улица" ColumnName="Улица" />
+          <ScalarProperty Name="НомерДома" ColumnName="НомерДома" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ВидыРабот">
+      <EntityTypeMapping TypeName="ДипломModel.ВидыРабот">
+        <MappingFragment StoreEntitySet="ВидыРабот">
+          <ScalarProperty Name="IDВида" ColumnName="IDВида" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Цена" ColumnName="Цена" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Заявки">
+      <EntityTypeMapping TypeName="ДипломModel.Заявки">
+        <MappingFragment StoreEntitySet="Заявки">
+          <ScalarProperty Name="IDЗаявки" ColumnName="IDЗаявки" />
+          <ScalarProperty Name="IDКлиента" ColumnName="IDКлиента" />
+          <ScalarProperty Name="ПлановаяДатаНачалаРабот" ColumnName="ПлановаяДатаНачалаРабот" />
+          <ScalarProperty Name="ПлановаяДатаОкончанияРабот" ColumnName="ПлановаяДатаОкончанияРабот" />
+          <ScalarProperty Name="IDСтатуса" ColumnName="IDСтатуса" />
+          <ScalarProperty Name="IDВида" ColumnName="IDВида" />
+          <ScalarProperty Name="IDРаботника" ColumnName="IDРаботника" />
+          <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
+          <ScalarProperty Name="IDПользователя" ColumnName="IDПользователя" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Клиенты">
+      <EntityTypeMapping TypeName="ДипломModel.Клиенты">
+        <MappingFragment StoreEntitySet="Клиенты">
+          <ScalarProperty Name="IDКлиента" ColumnName="IDКлиента" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="НомерТелефона" ColumnName="НомерТелефона" />
+          <ScalarProperty Name="Почта" ColumnName="Почта" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Отчеты">
+      <EntityTypeMapping TypeName="ДипломModel.Отчеты">
+        <MappingFragment StoreEntitySet="Отчеты">
+          <ScalarProperty Name="IDОтчета" ColumnName="IDОтчета" />
+          <ScalarProperty Name="IDЗаявки" ColumnName="IDЗаявки" />
+          <ScalarProperty Name="ОписаниеРабот" ColumnName="ОписаниеРабот" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пользователи">
+      <EntityTypeMapping TypeName="ДипломModel.Пользователи">
+        <MappingFragment StoreEntitySet="Пользователи">
+          <ScalarProperty Name="IDПользователя" ColumnName="IDПользователя" />
+          <ScalarProperty Name="IDРоли" ColumnName="IDРоли" />
+          <ScalarProperty Name="Логин" ColumnName="Логин" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Работники">
+      <EntityTypeMapping TypeName="ДипломModel.Работники">
+        <MappingFragment StoreEntitySet="Работники">
+          <ScalarProperty Name="IDРаботника" ColumnName="IDРаботника" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="Должность" ColumnName="Должность" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Роли">
+      <EntityTypeMapping TypeName="ДипломModel.Роли">
+        <MappingFragment StoreEntitySet="Роли">
+          <ScalarProperty Name="IDРоли" ColumnName="IDРоли" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="СтатусРаботы">
+      <EntityTypeMapping TypeName="ДипломModel.СтатусРаботы">
+        <MappingFragment StoreEntitySet="СтатусРаботы">
+          <ScalarProperty Name="IDСтатуса" ColumnName="IDСтатуса" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

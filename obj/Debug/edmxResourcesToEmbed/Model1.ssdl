@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ДипломModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Адреса">
+    <Key>
+      <PropertyRef Name="IDАдреса" />
+    </Key>
+    <Property Name="IDАдреса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Города" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Улица" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="НомерДома" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ВидыРабот">
+    <Key>
+      <PropertyRef Name="IDВида" />
+    </Key>
+    <Property Name="IDВида" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Цена" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Заявки">
+    <Key>
+      <PropertyRef Name="IDЗаявки" />
+    </Key>
+    <Property Name="IDЗаявки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDКлиента" Type="int" Nullable="false" />
+    <Property Name="ПлановаяДатаНачалаРабот" Type="date" />
+    <Property Name="ПлановаяДатаОкончанияРабот" Type="date" />
+    <Property Name="IDСтатуса" Type="int" Nullable="false" />
+    <Property Name="IDВида" Type="int" Nullable="false" />
+    <Property Name="IDРаботника" Type="int" Nullable="false" />
+    <Property Name="IDАдреса" Type="int" Nullable="false" />
+    <Property Name="IDПользователя" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Клиенты">
+    <Key>
+      <PropertyRef Name="IDКлиента" />
+    </Key>
+    <Property Name="IDКлиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="НомерТелефона" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="Почта" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Отчеты">
+    <Key>
+      <PropertyRef Name="IDОтчета" />
+    </Key>
+    <Property Name="IDОтчета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDЗаявки" Type="int" Nullable="false" />
+    <Property Name="ОписаниеРабот" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Пользователи">
+    <Key>
+      <PropertyRef Name="IDПользователя" />
+    </Key>
+    <Property Name="IDПользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDРоли" Type="int" Nullable="false" />
+    <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Работники">
+    <Key>
+      <PropertyRef Name="IDРаботника" />
+    </Key>
+    <Property Name="IDРаботника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Должность" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Роли">
+    <Key>
+      <PropertyRef Name="IDРоли" />
+    </Key>
+    <Property Name="IDРоли" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="СтатусРаботы">
+    <Key>
+      <PropertyRef Name="IDСтатуса" />
+    </Key>
+    <Property Name="IDСтатуса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Заявки_Адреса">
+    <End Role="Адреса" Type="Self.Адреса" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Адреса">
+        <PropertyRef Name="IDАдреса" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDАдреса" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_ВидыРабот">
+    <End Role="ВидыРабот" Type="Self.ВидыРабот" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ВидыРабот">
+        <PropertyRef Name="IDВида" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDВида" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_Клиенты">
+    <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиенты">
+        <PropertyRef Name="IDКлиента" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDКлиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="IDПользователя" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDПользователя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_Работники">
+    <End Role="Работники" Type="Self.Работники" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Работники">
+        <PropertyRef Name="IDРаботника" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDРаботника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заявки_СтатусРаботы">
+    <End Role="СтатусРаботы" Type="Self.СтатусРаботы" Multiplicity="1" />
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="СтатусРаботы">
+        <PropertyRef Name="IDСтатуса" />
+      </Principal>
+      <Dependent Role="Заявки">
+        <PropertyRef Name="IDСтатуса" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Отчеты_Заявки">
+    <End Role="Заявки" Type="Self.Заявки" Multiplicity="1" />
+    <End Role="Отчеты" Type="Self.Отчеты" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заявки">
+        <PropertyRef Name="IDЗаявки" />
+      </Principal>
+      <Dependent Role="Отчеты">
+        <PropertyRef Name="IDЗаявки" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователи_Роли">
+    <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Роли">
+        <PropertyRef Name="IDРоли" />
+      </Principal>
+      <Dependent Role="Пользователи">
+        <PropertyRef Name="IDРоли" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ДипломModelContainer">
+    <EntitySet Name="Адреса" EntityType="Self.Адреса" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ВидыРабот" EntityType="Self.ВидыРабот" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заявки" EntityType="Self.Заявки" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Отчеты" EntityType="Self.Отчеты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Работники" EntityType="Self.Работники" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="СтатусРаботы" EntityType="Self.СтатусРаботы" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Заявки_Адреса" Association="Self.FK_Заявки_Адреса">
+      <End Role="Адреса" EntitySet="Адреса" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_ВидыРабот" Association="Self.FK_Заявки_ВидыРабот">
+      <End Role="ВидыРабот" EntitySet="ВидыРабот" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_Клиенты" Association="Self.FK_Заявки_Клиенты">
+      <End Role="Клиенты" EntitySet="Клиенты" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_Пользователи" Association="Self.FK_Заявки_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_Работники" Association="Self.FK_Заявки_Работники">
+      <End Role="Работники" EntitySet="Работники" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заявки_СтатусРаботы" Association="Self.FK_Заявки_СтатусРаботы">
+      <End Role="СтатусРаботы" EntitySet="СтатусРаботы" />
+      <End Role="Заявки" EntitySet="Заявки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Отчеты_Заявки" Association="Self.FK_Отчеты_Заявки">
+      <End Role="Заявки" EntitySet="Заявки" />
+      <End Role="Отчеты" EntitySet="Отчеты" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователи_Роли" Association="Self.FK_Пользователи_Роли">
+      <End Role="Роли" EntitySet="Роли" />
+      <End Role="Пользователи" EntitySet="Пользователи" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

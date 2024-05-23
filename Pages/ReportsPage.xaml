@@ -4,79 +4,122 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:DiplomKarakuyumjyan"
+      DataContext="{Binding RelativeSource={RelativeSource Self}}"
       mc:Ignorable="d"
       d:DesignWidth="1000"
       d:DesignHeight="500"
       Title="ReportsPage" >
-    <Grid>
-        <Border CornerRadius="12" HorizontalAlignment="Center" >
+    <Border CornerRadius="11"
+         BorderThickness="2"
+         Opacity="0.95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#462AD8" Offset="0" />
+                <GradientStop Color="#DA34AE" Offset="0.75" />
+                <GradientStop Color="#8A16C1" Offset="1" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
         <Border.Background>
-            <ImageBrush ImageSource="/Images/back-image.jpg"/>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1B1448" Offset="1" />
+            </LinearGradientBrush>
         </Border.Background>
-
-        <Border CornerRadius="11"                    
-            BorderThickness="2"
-            Opacity="0.95" HorizontalAlignment="Left" >
-
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#462AD8" Offset="0"/>
-                    <GradientStop Color="#DA34AE" Offset="0.75"/>
-                    <GradientStop Color="#8A16C1" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#060531" Offset="0"/>
-                    <GradientStop Color="#1B1448" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Отчёты"
-                               Foreground="DarkGray"
-                               FontSize="15"
-                               FontFamily="Montserrat"
-                               Grid.Column="0"
-                               VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
-                    
-                </Grid>
-                <DataGrid Visibility="Visible" ColumnWidth="*" FontSize="18" x:Name="data_grid" AutoGenerateColumns="False" BorderThickness="2" BorderBrush="White" Foreground="Black" Background="MediumPurple" HeadersVisibility="Column" Grid.Row="1" Margin="77,5,41,99">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" FontSize="16" Header="Reports Number" Binding="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}" ></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Service" Binding="{Binding Услуга.ServiceName}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="City" Binding="{Binding Адрес.Город.CityName}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Street" Binding="{Binding Адрес.Street}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="House number" Binding="{Binding Адрес.HouseNumber}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Cadastral number" Binding="{Binding Адрес.CadastralNumber}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Worker" Binding="{Binding Адрес.CadastralNumber}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Start and end date" Binding="{Binding Адрес.CadastralNumber}"></DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="True" FontSize="16" Header="Work price" Binding="{Binding Адрес.CadastralNumber}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-
-
-                </DataGrid>
-
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="10" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border MinHeight="40" Background="White" CornerRadius="20">
+                    <StackPanel Orientation="Horizontal" Margin="10,0" VerticalAlignment="Center">
+                        <Path Fill="Black" Data=" M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        <TextBox Background="Transparent" VerticalContentAlignment="Center"  Margin="20,0" BorderThickness="0" x:Name="TextBoxSearch" TextAlignment="Center"  MinWidth="150"/>
+                    </StackPanel>
+                </Border>
+                <Label Grid.Column="1" Content="Фильтры:" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                <Label x:Name="labelSearchCount" Foreground="White"/>
+                <Border Margin="10,0" Grid.Column="2" Style="{StaticResource ContentBorder}">
+                    <ComboBox  ItemsSource="{Binding ServicesCollection}"  x:Name="ServicesComboBox">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Наименование}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Border>
+                <Border Grid.Column="3" Margin="10,0" Style="{StaticResource ContentBorder}">
+                    <ComboBox ></ComboBox>
+                </Border>
+                <Border Margin="10,0" Grid.Column="4" Style="{StaticResource ContentBorder}">
+                    <DatePicker IsTodayHighlighted="True" x:Name="OrderDateFilter" />
+                </Border>
             </Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="1" >
+                <Border Margin="10" CornerRadius="20" Background="White">
+                    <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ReportsList}" SelectionChanged="ListBoxClients_SelectionChanged" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="{Binding Id}" Margin="5"/>
+                                            <Label Content="{Binding Client.Name}" Margin="5"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="{Binding Order.DateStart}" Margin="2"/>
+                                            <Label Content="{Binding Order.DateEnd}" Margin="2"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </ScrollViewer>
+            <Border Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Background="White" CornerRadius="10" Padding="20" Margin="20">
+                <ListView  x:Name="SelectedReportDisplay" ItemsSource="{Binding DisplaySelectedReportCollection,Mode=OneWay}" >
+                    <ListView.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <StackPanel Margin="20">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Номер заявки:"/>
+                                    <TextBlock Text="{Binding Id}" Margin="10,0" FontSize="18"/>
+                                    <TextBlock Text="Статус :"></TextBlock>
+                                    <TextBlock Text="{Binding Order.Status}" Margin="10,0"></TextBlock>
+                                </StackPanel>
+                                <TextBlock Text="Услуга:"/>
+                                <TextBlock  Text="{Binding Order.Service}" FontSize="16"></TextBlock>
+                                <TextBlock Text="Клиент:"/>
+                                <TextBlock x:Name="SelectedUserAdressText" Text="{Binding Client.Name}" FontSize="16"></TextBlock>
+                                <TextBlock Text="Исполняющий:"/>
+                                <TextBlock  Text="{Binding  Order.EmployerName}" FontSize="18"/>
+                                <TextBlock Text="Менеджер:"/>
+                                <TextBlock  Text="{Binding Order.ManagerName}" FontSize="16"></TextBlock>
+                                <TextBlock Text="Отчет:"/>
+                                <TextBlock  Text="{Binding Description}" FontSize="18"/>
+                            </StackPanel>
 
-        </Border>
+                        </ItemContainerTemplate>
+                    </ListView.ItemTemplate>
 
+                </ListView>
+            </Border>
+        </Grid>
     </Border>
-    </Grid>
 </Page>

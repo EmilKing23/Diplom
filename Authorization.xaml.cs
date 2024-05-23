@@ -19,6 +19,8 @@ namespace DiplomKarakuyumjyan
     /// </summary>
     public partial class Authorization : Window
     {
+        ДипломEntities entities = new ДипломEntities();
+
         public Authorization()
         {
             InitializeComponent();
@@ -42,9 +44,48 @@ namespace DiplomKarakuyumjyan
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            SelectAService Menu = new SelectAService();
-            Menu.Show();
-            this.Close();
+           var user = entities.Пользователи.FirstOrDefault(_ => _.Логин.Equals(txtUser.Text) && _.Пароль.Equals(txtPass.Password));
+
+            if(user is null)
+            {
+                HintLabel.Content = "Неверный логин или пароль !";
+                HintLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                switch (user.IDРоли)
+                {
+                    case 0: 
+                        return; 
+                    case 1: {
+                            UserConfiguration.Usertype = UserConfiguration.UserTypes.Admin;
+                        } break;
+                    case 2:
+                        {
+                            UserConfiguration.Usertype = UserConfiguration.UserTypes.Manager;
+                        } break;
+                    case 3:
+                        {
+                            UserConfiguration.Usertype = UserConfiguration.UserTypes.Employer;
+                        } break;
+                }
+
+                UserConfiguration.UserInfo = new UserConfiguration.User()
+                {
+                    Name = user.Имя,
+                    SurName = user.Фамилия,
+                    Role = UserConfiguration.Usertype
+                };
+
+                SelectAService Menu = new SelectAService();
+                Menu.Show();
+                this.Close();
+            }
         }
+
+        //private void btnNoLogin_Click(object sender, RoutedEventArgs e)
+        //{
+        //    UserConfiguration.Usertype = UserConfiguration.UserTypes.Client;
+        //}
     }
 }

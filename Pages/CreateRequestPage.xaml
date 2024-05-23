@@ -3,15 +3,43 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:DiplomKarakuyumjyan"
+      xmlns:local="clr-namespace:DiplomKarakuyumjyan" xmlns:pages="clr-namespace:DiplomKarakuyumjyan.Pages"
       mc:Ignorable="d"
-      Title="CreateRequestPage">
+      d:Width="1000"
+      d:Height="700"
+      Title="CreateRequestPage" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style TargetType="Border" x:Key="ContentBorder">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5,5"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#462AD8" Offset="0" />
+                        <GradientStop Color="#DA34AE" Offset="0.75" />
+                        <GradientStop Color="#8A16C1" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        <Border CornerRadius="12" HorizontalAlignment="Center">
+        <Border CornerRadius="12" HorizontalAlignment="Stretch">
             <Border CornerRadius="11"
                     BorderThickness="2"
-                    Opacity="0.95" HorizontalAlignment="Left">
-
+                    Opacity="0.95" HorizontalAlignment="Stretch">
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#462AD8" Offset="0" />
@@ -30,8 +58,19 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
-                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+
+
+                    </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0">
 
@@ -42,7 +81,7 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Create request"
+                        <TextBlock Text="Создать заявку"
                                    Foreground="DarkGray"
                                    FontSize="25"
                                    FontFamily="Montserrat"
@@ -50,60 +89,96 @@
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0" />
                     </Grid>
-                    <StackPanel Width="450"
-                                Grid.Row="1"
-                                Orientation="Vertical"
-                                Margin="0,35,0,0">
-                        <ComboBox Margin="0,30,0,0"
-                                  Width="400"
-                                  Height="35"
-                                  Foreground="MediumPurple"
-                                  FontSize="20"
-                                  FontFamily="Montserrat"
-                                  Cursor="Hand">
+                    <StackPanel Grid.ColumnSpan="2"  Grid.Row="1">
 
-                        </ComboBox>
+                        <Frame Margin="10"  Grid.Row="2" x:Name="ClientsFrame"/>
+                    </StackPanel>
+                    <Grid VerticalAlignment="Top" Grid.Row="2"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Услуга" />
+                        <Border Style="{StaticResource ContentBorder}" Grid.Column="1" >
+                            <ComboBox Grid.Column="1" x:Name="ServicesComboBox" ItemsSource="{Binding ServicesCollection}" MaxHeight="50" Width="200">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name }"></TextBlock>
+                                            <TextBlock Margin="5,0" Text="{Binding Price}"></TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Border>
+                    </Grid>
+                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="3"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Исполняющий" />
+                        <Border Style="{StaticResource ContentBorder}" Grid.Column="1" >
+                            <ComboBox  x:Name="EmployersComboBox" ItemsSource="{Binding EmployersCollection}" MaxHeight="50" Width="200" >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name }"></TextBlock>
+                                            <TextBlock  Margin="5,0" Text="{Binding Vaccancy}"></TextBlock>
+                                            <TextBlock></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Border>
+                    </Grid>
+                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="4" Grid.Column="0"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Дата окончания " />
+                        <Border Grid.Column="1" Style="{StaticResource ContentBorder}">
+                            <DatePicker  BorderThickness="0" MaxHeight="50" Width="200" />
+                        </Border>
+                    </Grid>
+                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="5" Grid.Column="0"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Дата начала" />
+                        <Border Grid.Column="1" Style="{StaticResource ContentBorder}">
+                            <DatePicker  BorderThickness="0" MaxHeight="50" Width="200" />
+                        </Border>
+                      
+                    </Grid>
+                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="6" Grid.Column="0"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Адрес " />
+                       
+                            <Border Grid.Column="1"  Style="{StaticResource ContentBorder}">
+                                <TextBox MinWidth="200" HorizontalAlignment="Stretch" Background="Transparent"  BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                            </Border>
+                       
+                    </Grid>
+                    <StackPanel  VerticalAlignment="Center"
+                                Grid.Row="4"
+                                Grid.Column="1">
+
                         <Button x:Name="btnCreatRequest"
                                 BorderThickness="0"
-                                Content="Creat a request"
+                                Content="Создать заявку"
                                 Foreground="White"
                                 FontSize="20"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"
-                                Margin="0,30,0,0"
+                                
                                 Click="btnCreatRequest_Click">
-
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#462AD8" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#28AEED" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="250" Height="40"
-                                            CornerRadius="20"
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <Button x:Name="btnExit"
-                                BorderThickness="0"
-                                Content="Exit"
-                                Foreground="White"
-                                FontSize="20"
-                                FontFamily="Montserrat"
-                                Cursor="Hand"
-                                Margin="0,30,0,0"
-                                Click="btnExit_Click">
 
                             <Button.Style>
                                 <Style TargetType="Button">

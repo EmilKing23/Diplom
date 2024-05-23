@@ -14,15 +14,49 @@
         Background="Azure"
         Title="Главное меню"
         MouseDown="Winwow_MouseDown">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="AliceBlue"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <Style TargetType="Button" x:Key="MenuButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Width="150" Height="40"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center" Content="{TemplateBinding Button.Content}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,30,0,0"/>
+            <Setter Property="Background" Value="#462AD8"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#28AEED" />
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="70" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="29*"></ColumnDefinition>
+            <ColumnDefinition Width="71*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Grid.ColumnSpan="3" Background="#060531">
             <StackPanel Orientation="Horizontal" Margin="10">
@@ -32,36 +66,30 @@
                            FontSize="26"
                            ></TextBlock>
             </StackPanel>
+
         </Border>
-        
+        <Border Style="{DynamicResource ContentBorder}" Background="Transparent" Margin="10" Width="420" Grid.Column="2" VerticalAlignment="Top" 
+             HorizontalAlignment="Right" Height="50">
+            <StackPanel   Orientation="Horizontal"  >
+                <TextBlock Text="Пользователь: "></TextBlock>
+                <TextBlock x:Name="UserName" Text="TestName"  TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="UserSurname" Text="TestSurName" TextTrimming="CharacterEllipsis" Margin="10,10"/>
+                <TextBlock x:Name="UserRole" Text="testRole" TextTrimming="CharacterEllipsis" Margin="0 0 50 0"/>
+            </StackPanel>
+        </Border>
+      
         <StackPanel Width="200"
                     Background="#060531"
                     Grid.Row="1"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Center">
             <StackPanel Margin="10">
-                <Button x:Name="btnReports"
-                        BorderThickness="0"
+                <Button Style="{DynamicResource MenuButton}" x:Name="btnReports"
                         Content="Отчеты"
-                        Foreground="White"
-                        FontSize="18"
-                        FontFamily="Montserrat"
-                        Cursor="Hand"
-                        Margin="0,50,0,0"
                         Click="btnReports_Click">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#462AD8" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#28AEED" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="150" Height="40"
-                                    CornerRadius="20"
+                                    CornerRadius="10"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                   HorizontalAlignment="Center" />
@@ -70,31 +98,49 @@
                     </Button.Template>
                 </Button>
                 <Button x:Name="btnCreatRequest"
-                        BorderThickness="0"
+                        Style="{DynamicResource MenuButton}"
                         Content="Создать заявку"
-                        Foreground="White"
-                        FontSize="18"
-                        FontFamily="Montserrat"
-                        Cursor="Hand"
-                        Margin="0,30,0,0"
+                       
                         Click="btnCreatRequest_Click">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#462AD8" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#28AEED" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="150" Height="40"
-                                    CornerRadius="20"
+                                   CornerRadius="10"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                   HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnClients"
+                        Style="{DynamicResource MenuButton}"
+                        Content="Клиенты"
+                         Click="btnClients_Click">
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                     CornerRadius="10"
+                     Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnEmployerOrders"
+         Style="{DynamicResource MenuButton}"
+         Content="Заявки в работе"
+         >
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                           CornerRadius="10"
+                                     Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                             HorizontalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
@@ -121,7 +167,7 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Width="150" Height="40"
-                                    CornerRadius="20"
+                                    CornerRadius="10"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                   HorizontalAlignment="Center" />
@@ -132,7 +178,7 @@
             </StackPanel>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden"
-               Margin="10"
+               Margin="10,10,10,10"
                Grid.Row="1"
                Grid.Column="1"
                Grid.ColumnSpan="2"

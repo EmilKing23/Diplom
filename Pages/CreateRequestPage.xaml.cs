@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿using DiplomKarakuyumjyan.Pages;
+using System;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -6,16 +11,38 @@ namespace DiplomKarakuyumjyan
 {
     public partial class CreateRequestPage : Page
     {
-        
+        ClientsPage clientsPage = new ClientsPage();
+        ДипломEntities context = new ДипломEntities();
+
         public CreateRequestPage()
         {
             InitializeComponent();
-           
-        }
+      
+            ClientsFrame.Content = clientsPage;
+            ServicesCollection = new ObservableCollection<Services>() ;
+            EmployersCollection = new ObservableCollection<Employers>();
+            foreach (var item in context.Работники)
+            {
+                EmployersCollection.Add(new Employers
+                {
+                    Id = item.IDРаботника,
+                    Name = $"{item.Фамилия} {item.Имя}",
+                    Vaccancy = item.Должность
+                });
+            }
+            foreach (var item in context.ВидыРабот)
+            {
+                ServicesCollection.Add(new Services
+                {
+                    Id = item.IDВида,
+                    Name = $"{item.Наименование}",
+                    Price = decimal.ToDouble(item.Цена)
+                });
+            }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            ServicesComboBox.ItemsSource = ServicesCollection;
+                EmployersComboBox.ItemsSource = EmployersCollection;
+
         }
 
         private void btnCreatRequest_Click(object sender, RoutedEventArgs e)
@@ -23,19 +50,25 @@ namespace DiplomKarakuyumjyan
 
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        public ObservableCollection<Services> ServicesCollection { get; set; }
+        public ObservableCollection<Employers> EmployersCollection { get; set; }
+        public class Services
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public double Price { get; set; }
+        }
+
+        public class Employers
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Vaccancy { get; set; }
+        }
+
+        private void EmployersComboBox_SelectionChanged()
         {
 
         }
-
-        // private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        // {
-        //    
-        // }
-        // private void Winwow_MouseDown(object sender, MouseButtonEventArgs e)
-        // {
-        //     if (e.LeftButton == MouseButtonState.Pressed)
-        //         DragMove();
-        // }
     }
 }

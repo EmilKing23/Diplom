@@ -1,0 +1,132 @@
+﻿<Page x:Class="DiplomKarakuyumjyan.Pages.ClientsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="800" 
+      Title="ClientsPage"  DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Border CornerRadius="11"
+             BorderThickness="2"
+             Opacity="0.95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#462AD8" Offset="0" />
+                <GradientStop Color="#DA34AE" Offset="0.75" />
+                <GradientStop Color="#8A16C1" Offset="1" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1B1448" Offset="1" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition x:Name="ClientOperations" Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label FontSize="18" Content="Клиенты" ></Label>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
+                <Border MinHeight="40" Background="AliceBlue" CornerRadius="20" Margin="10">
+                    <TextBox Background="Transparent" VerticalContentAlignment="Center"  Margin="20,0" BorderThickness="0" x:Name="TextBoxSearch" TextAlignment="Center" TextChanged="TextBox_TextChanged"  MinWidth="150">
+                        <TextBox.Style>
+                            <Style>
+
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Border>
+                <Label x:Name="labelSearchCount" Foreground="White"/>
+            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="2" >
+                <Border Margin="10" CornerRadius="20" Background="AliceBlue">
+                    <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectionChanged="ListBoxClients_SelectionChanged" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ClientsList, Mode=OneWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Имя}" Margin="5"/>
+                                        <TextBlock Text="{Binding Фамилия}" Margin="5"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </ScrollViewer>
+            <Border Background="AliceBlue" CornerRadius="10" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="20">
+                <StackPanel Margin="20">
+                    <TextBlock Text="ФИО:"/>
+                    <TextBlock x:Name="SelectedUserNameText" Text="{Binding  Имя, Mode=OneWay}" FontSize="18"/>
+                    <TextBlock Text="Телефон:"/>
+                    <TextBlock x:Name="SelectedUserPhoneText" Text="{Binding Телефон, Mode=OneWay}" FontSize="16"></TextBlock>
+                    <TextBlock Text="E-mail:"/>
+                    <TextBlock x:Name="SelectedUserAdressText" Text="{Binding Почта, Mode=OneWay}" FontSize="16"></TextBlock>
+
+                </StackPanel>
+            </Border>
+            <Label FontSize="18" Grid.Row="3" Content="Новый клиент" />
+            <Border Grid.Row="4" >
+              
+                <StackPanel>
+                 
+                    <Label Content="Имя"/>
+                    <Border Style="{StaticResource ContentBorder}">
+                        <TextBox x:Name="ClientNameTxtBox"/>
+                    </Border>
+                    <Label Content="Фамилия"/>
+                    <Border Style="{StaticResource ContentBorder}">
+                        <TextBox x:Name="ClientSurNameTxtBox"/>
+                    </Border>
+                    <Label Content="Отчество"/>
+                    <Border Style="{StaticResource ContentBorder}">
+                        <TextBox x:Name="ClientPatronymicNameTxtBox"/>
+                    </Border>
+
+                </StackPanel>
+            </Border>
+            <Border Grid.Row="4" Grid.Column="1">
+
+                <StackPanel>
+
+                    <Label Content="Телефон"/>
+                    <Border Style="{StaticResource ContentBorder}">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="+7" FontSize="8" Foreground="Black"></Label>
+                            <TextBox Grid.Column="1" VerticalContentAlignment="Center" x:Name="ClientPhoneTxtBox"/>
+                        </Grid>
+                    </Border>
+                    <Label Content="Электронная Почта"/>
+                    <Border Style="{StaticResource ContentBorder}">
+                        <TextBox x:Name="ClientEmailTxtBox"/>
+                    </Border>
+                    <Border BorderThickness="0" Margin="10,25" Background="Green"   Style="{StaticResource ContentBorder}">
+                        <Button  BorderThickness="0" Background="Transparent" Click="Button_Click" Foreground="White"  Content="Добавить"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+           
+                <Border x:Name="ClientDeleteOperation" Visibility="Hidden" Grid.Row="1" Grid.Column="2" Margin="10"   MaxHeight="40" BorderThickness="0"  Background="Crimson"  Style="{StaticResource ContentBorder}">
+                    <Button   BorderThickness="0" Background="Transparent" x:Name="DeleteClient"  Click="DeleteClient_Click"   Foreground="White" Content="Удалить"/>
+                </Border>
+           
+        </Grid>
+    </Border>
+</Page>

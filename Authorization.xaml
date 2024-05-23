@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="LOG IN"
+                    <TextBlock Text="Вход"
                                Foreground="DarkGray"
                                FontSize="10"
                                FontFamily="Montserrat"
@@ -136,7 +136,7 @@
                     <Image Source="/Images/image_2024-04-26_19-55-55.png" />
 
 
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Логин"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -164,7 +164,7 @@
                         </TextBox.Background>
                     </TextBox>
 
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Пароль"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -191,10 +191,10 @@
                                         AlignmentX="Left"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-
+                    <Label x:Name="HintLabel" Visibility="Hidden" FontSize="18" HorizontalAlignment="Center" Foreground="Red"></Label>
                     <Button x:Name="btnLogin"  
                             BorderThickness="0"
-                            Content="LOG IN"
+                            Content="Войти"
                             Foreground="White"
                             FontSize="20"
                             FontFamily="Montserrat"
@@ -229,7 +229,7 @@
                                 HorizontalAlignment="Center"
                                 Margin="0,15,0,0">
 
-                        <Button x:Name="btnNoLogin"                          
+                        <!--<Button x:Name="btnNoLogin"                          
                             BorderThickness="0"
                             Content="Log in without authorization"
                             Foreground="White"
@@ -237,7 +237,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
                             Margin="0,5,0,0"
-                            Click="btnLogin_Click" Width="350">
+                            Click="btnNoLogin_Click" Width="350">
 
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -260,7 +260,7 @@
                                     </Border>
                                 </ControlTemplate>
                             </Button.Template>
-                        </Button>
+                        </Button>-->
                     </StackPanel>
 
                 </StackPanel>

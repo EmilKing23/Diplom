@@ -25,7 +25,6 @@ C:\Дипломная работа\DiplomKarakuyumjyan\obj\Debug\Reports.g.cs
 C:\Дипломная работа\DiplomKarakuyumjyan\obj\Debug\CreateRequest.baml
 C:\Дипломная работа\DiplomKarakuyumjyan\obj\Debug\Reports.baml
 E:\Diplom\obj\Debug\DiplomKarakuyumjyan.csproj.AssemblyReference.cache
-E:\Diplom\obj\Debug\DiplomKarakuyumjyan.csproj.SuggestedBindingRedirects.cache
 E:\Diplom\obj\Debug\authorization.g.cs
 E:\Diplom\obj\Debug\MainWindow.g.cs
 E:\Diplom\obj\Debug\Pages\CreateRequestPage.g.cs
@@ -95,4 +94,22 @@ E:\Diplom\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\Diplom\bin\Debug\System.ValueTuple.xml
 E:\Diplom\obj\Debug\Avalonia\Resources.Inputs.cache
 E:\Diplom\obj\Debug\DiplomKarakuyumjyan.GeneratedMSBuildEditorConfig.editorconfig
-E:\Diplom\obj\Debug\DiplomKarakuyumjyan.csproj.CopyComplete
+E:\Diplom\obj\Debug\DiplomKarakuyumjyan_Content.g.cs
+E:\Diplom\bin\Debug\EntityFramework.dll
+E:\Diplom\bin\Debug\EntityFramework.SqlServer.dll
+E:\Diplom\bin\Debug\EntityFramework.xml
+E:\Diplom\bin\Debug\EntityFramework.SqlServer.xml
+E:\Diplom\bin\Debug\ru\EntityFramework.resources.dll
+E:\Diplom\obj\Debug\DiplomKa.4B7F130B.Up2Date
+E:\Diplom\obj\Debug\Pages\ClientsPage.g.cs
+E:\Diplom\obj\Debug\Pages\ClientsPage.baml
+E:\Diplom\bin\Debug\MaterialDesignColors.dll
+E:\Diplom\bin\Debug\MaterialDesignThemes.Wpf.dll
+E:\Diplom\bin\Debug\Microsoft.Xaml.Behaviors.dll
+E:\Diplom\bin\Debug\MaterialDesignColors.pdb
+E:\Diplom\bin\Debug\MaterialDesignThemes.Wpf.pdb
+E:\Diplom\bin\Debug\MaterialDesignThemes.Wpf.xml
+E:\Diplom\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+E:\Diplom\bin\Debug\Microsoft.Xaml.Behaviors.xml
+E:\Diplom\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+E:\Diplom\obj\Debug\App.baml
