@@ -27,10 +27,9 @@ namespace DiplomKarakuyumjyan
         public int IDСтатуса { get; set; }
         public int IDВида { get; set; }
         public int IDРаботника { get; set; }
-        public int IDАдреса { get; set; }
+        public string Адрес { get; set; }
         public int IDПользователя { get; set; }
     
-        public virtual Адреса Адреса { get; set; }
         public virtual ВидыРабот ВидыРабот { get; set; }
         public virtual Клиенты Клиенты { get; set; }
         public virtual Пользователи Пользователи { get; set; }

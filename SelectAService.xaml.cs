@@ -90,5 +90,11 @@ namespace DiplomKarakuyumjyan
             ClientsPage page = new ClientsPage();
             MainWindowFrame.Content = page;
         }
+
+        private void btnEmployerOrders_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalPage personalPage = new PersonalPage();
+            MainWindowFrame.Content = personalPage;
+        }
     }
 }

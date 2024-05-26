@@ -169,6 +169,9 @@
     <Compile Include="Pages\CreateRequestPage.xaml.cs">
       <DependentUpon>CreateRequestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PersonalPage.xaml.cs">
+      <DependentUpon>PersonalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
@@ -185,9 +188,6 @@
     <Compile Include="ViewModels\Orders.cs" />
     <Compile Include="ViewModels\Reports.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="Адреса.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ВидыРабот.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -237,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CreateRequestPage.xaml" />
+    <Page Include="Pages\PersonalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ReportsPage.xaml" />
     <Page Include="registration.xaml">
       <SubType>Designer</SubType>
@@ -317,7 +321,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Avalonia.BuildServices.0.0.29\build\Avalonia.BuildServices.targets" Condition="Exists('packages\Avalonia.BuildServices.0.0.29\build\Avalonia.BuildServices.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

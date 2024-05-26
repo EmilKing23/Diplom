@@ -9,6 +9,15 @@
       d:DesignWidth="1000"
       d:DesignHeight="500"
       Title="ReportsPage" >
+    <Page.Resources>
+        <Style TargetType="Label" x:Key="ListBoxlabel">
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+    </Page.Resources>
     <Border CornerRadius="11"
          BorderThickness="2"
          Opacity="0.95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -52,13 +61,13 @@
                         <TextBox Background="Transparent" VerticalContentAlignment="Center"  Margin="20,0" BorderThickness="0" x:Name="TextBoxSearch" TextAlignment="Center"  MinWidth="150"/>
                     </StackPanel>
                 </Border>
-                <Label Grid.Column="1" Content="Фильтры:" Foreground="White" VerticalAlignment="Center" FontSize="16"/>
+                <Label Grid.Column="1" Content="Фильтры:" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
                 <Label x:Name="labelSearchCount" Foreground="White"/>
                 <Border Margin="10,0" Grid.Column="2" Style="{StaticResource ContentBorder}">
                     <ComboBox  ItemsSource="{Binding ServicesCollection}"  x:Name="ServicesComboBox">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Наименование}"></TextBlock>
+                                <TextBlock Style="{StaticResource ListBoxlabel}" Text="{Binding Наименование}"></TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -78,12 +87,12 @@
                                 <Border CornerRadius="10">
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
-                                            <Label Content="{Binding Id}" Margin="5"/>
-                                            <Label Content="{Binding Client.Name}" Margin="5"/>
+                                            <Label Style="{StaticResource ListBoxlabel}" Content="{Binding Id}" Margin="5"/>
+                                            <Label Style="{StaticResource ListBoxlabel}" Content="{Binding Client.Name}" Margin="5"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <Label Content="{Binding Order.DateStart}" Margin="2"/>
-                                            <Label Content="{Binding Order.DateEnd}" Margin="2"/>
+                                            <Label Style="{StaticResource ListBoxlabel}" Content="{Binding Order.DateStart}" Margin="2"/>
+                                            <Label Style="{StaticResource ListBoxlabel}" Content="{Binding Order.DateEnd}" Margin="2"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>

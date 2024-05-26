@@ -25,7 +25,6 @@ namespace DiplomKarakuyumjyan
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Адреса> Адреса { get; set; }
         public virtual DbSet<ВидыРабот> ВидыРабот { get; set; }
         public virtual DbSet<Заявки> Заявки { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }

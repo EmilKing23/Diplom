@@ -72,6 +72,7 @@ namespace DiplomKarakuyumjyan
 
                 UserConfiguration.UserInfo = new UserConfiguration.User()
                 {
+                    Id = user.IDПользователя,
                     Name = user.Имя,
                     SurName = user.Фамилия,
                     Role = UserConfiguration.Usertype

@@ -113,3 +113,5 @@ E:\Diplom\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 E:\Diplom\bin\Debug\Microsoft.Xaml.Behaviors.xml
 E:\Diplom\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 E:\Diplom\obj\Debug\App.baml
+E:\Diplom\obj\Debug\Pages\PersonalPage.g.cs
+E:\Diplom\obj\Debug\Pages\PersonalPage.baml

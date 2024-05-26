@@ -93,7 +93,7 @@
 
                         <Frame Margin="10"  Grid.Row="2" x:Name="ClientsFrame"/>
                     </StackPanel>
-                    <Grid VerticalAlignment="Top" Grid.Row="2"  >
+                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="2"  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -124,9 +124,10 @@
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name }"></TextBlock>
-                                            <TextBlock  Margin="5,0" Text="{Binding Vaccancy}"></TextBlock>
-                                            <TextBlock></TextBlock>
+                                            <TextBlock Text="{Binding Name }"/>
+                                            <TextBlock  Margin="5,0" Text="{Binding Vaccancy}"/>
+                                            <TextBlock  Text="В работе:"/>
+                                            <TextBlock  Margin="5,0" Text="{Binding OrdersCount}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
@@ -140,7 +141,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Дата окончания " />
                         <Border Grid.Column="1" Style="{StaticResource ContentBorder}">
-                            <DatePicker  BorderThickness="0" MaxHeight="50" Width="200" />
+                            <DatePicker  x:Name="DateStartCombo" BorderThickness="0" MaxHeight="50" Width="200" />
                         </Border>
                     </Grid>
                     <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="5" Grid.Column="0"  >
@@ -150,24 +151,44 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Дата начала" />
                         <Border Grid.Column="1" Style="{StaticResource ContentBorder}">
-                            <DatePicker  BorderThickness="0" MaxHeight="50" Width="200" />
+                            <DatePicker   x:Name="DateEndCombo" BorderThickness="0" MaxHeight="50" Width="200" />
                         </Border>
                       
                     </Grid>
-                    <Grid Margin="0,10" VerticalAlignment="Top" Grid.Row="6" Grid.Column="0"  >
+                    <Grid VerticalAlignment="Top" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Адрес " />
-                       
-                            <Border Grid.Column="1"  Style="{StaticResource ContentBorder}">
-                                <TextBox MinWidth="200" HorizontalAlignment="Stretch" Background="Transparent"  BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                        <Grid Margin="0,5" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label HorizontalContentAlignment="Right"  Content="Город:"></Label>
+                            <Border  Grid.Column="1" Style="{StaticResource ContentBorder}">
+                                <TextBox x:Name="CityTextBox"  MinWidth="200" HorizontalAlignment="Stretch" Background="Transparent"  BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                             </Border>
-                       
+                            <Label HorizontalContentAlignment="Right" Grid.Row="1" Content="Улица:"></Label>
+                            <Border Grid.Row="1" Margin="0,10" Grid.Column="1"  Style="{StaticResource ContentBorder}">
+                                <TextBox x:Name="StreetTextBox" MinWidth="200" HorizontalAlignment="Stretch" Background="Transparent"  BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                            </Border>
+                            <Label HorizontalContentAlignment="Right" Grid.Row="2" Content="Дом:"></Label>
+                            <Border Grid.Row="2" Grid.Column="1"  Style="{StaticResource ContentBorder}">
+                                <TextBox x:Name="LiterTextBox" MinWidth="200" HorizontalAlignment="Stretch" Background="Transparent"  BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        
+
                     </Grid>
                     <StackPanel  VerticalAlignment="Center"
-                                Grid.Row="4"
+                                Grid.Row="6"
                                 Grid.Column="1">
 
                         <Button x:Name="btnCreatRequest"

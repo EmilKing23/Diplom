@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Хранилище ДипломModelContainer" CdmEntityContainer="ДипломEntities">
-    <EntitySetMapping Name="Адреса">
-      <EntityTypeMapping TypeName="ДипломModel.Адреса">
-        <MappingFragment StoreEntitySet="Адреса">
-          <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
-          <ScalarProperty Name="Города" ColumnName="Города" />
-          <ScalarProperty Name="Улица" ColumnName="Улица" />
-          <ScalarProperty Name="НомерДома" ColumnName="НомерДома" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ВидыРабот">
       <EntityTypeMapping TypeName="ДипломModel.ВидыРабот">
         <MappingFragment StoreEntitySet="ВидыРабот">
@@ -30,7 +20,7 @@
           <ScalarProperty Name="IDСтатуса" ColumnName="IDСтатуса" />
           <ScalarProperty Name="IDВида" ColumnName="IDВида" />
           <ScalarProperty Name="IDРаботника" ColumnName="IDРаботника" />
-          <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
+          <ScalarProperty Name="Адрес" ColumnName="Адрес" />
           <ScalarProperty Name="IDПользователя" ColumnName="IDПользователя" />
         </MappingFragment>
       </EntityTypeMapping>

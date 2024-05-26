@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище ДипломModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Адреса">
-          <Key>
-            <PropertyRef Name="IDАдреса" />
-          </Key>
-          <Property Name="IDАдреса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Города" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Улица" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="НомерДома" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="ВидыРабот">
           <Key>
             <PropertyRef Name="IDВида" />
@@ -33,7 +24,7 @@
           <Property Name="IDСтатуса" Type="int" Nullable="false" />
           <Property Name="IDВида" Type="int" Nullable="false" />
           <Property Name="IDРаботника" Type="int" Nullable="false" />
-          <Property Name="IDАдреса" Type="int" Nullable="false" />
+          <Property Name="Адрес" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IDПользователя" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Клиенты">
@@ -91,18 +82,6 @@
           <Property Name="IDСтатуса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Заявки_Адреса">
-          <End Role="Адреса" Type="Self.Адреса" Multiplicity="1" />
-          <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Адреса">
-              <PropertyRef Name="IDАдреса" />
-            </Principal>
-            <Dependent Role="Заявки">
-              <PropertyRef Name="IDАдреса" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Заявки_ВидыРабот">
           <End Role="ВидыРабот" Type="Self.ВидыРабот" Multiplicity="1" />
           <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
@@ -188,7 +167,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ДипломModelContainer">
-          <EntitySet Name="Адреса" EntityType="Self.Адреса" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ВидыРабот" EntityType="Self.ВидыРабот" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Заявки" EntityType="Self.Заявки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
@@ -197,10 +175,6 @@
           <EntitySet Name="Работники" EntityType="Self.Работники" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="СтатусРаботы" EntityType="Self.СтатусРаботы" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Заявки_Адреса" Association="Self.FK_Заявки_Адреса">
-            <End Role="Адреса" EntitySet="Адреса" />
-            <End Role="Заявки" EntitySet="Заявки" />
-          </AssociationSet>
           <AssociationSet Name="FK_Заявки_ВидыРабот" Association="Self.FK_Заявки_ВидыРабот">
             <End Role="ВидыРабот" EntitySet="ВидыРабот" />
             <End Role="Заявки" EntitySet="Заявки" />
@@ -235,16 +209,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ДипломModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Адреса">
-          <Key>
-            <PropertyRef Name="IDАдреса" />
-          </Key>
-          <Property Name="IDАдреса" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Города" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Улица" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="НомерДома" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Заявки" Relationship="Self.FK_Заявки_Адреса" FromRole="Адреса" ToRole="Заявки" />
-        </EntityType>
         <EntityType Name="ВидыРабот">
           <Key>
             <PropertyRef Name="IDВида" />
@@ -265,9 +229,8 @@
           <Property Name="IDСтатуса" Type="Int32" Nullable="false" />
           <Property Name="IDВида" Type="Int32" Nullable="false" />
           <Property Name="IDРаботника" Type="Int32" Nullable="false" />
-          <Property Name="IDАдреса" Type="Int32" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IDПользователя" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Адреса" Relationship="Self.FK_Заявки_Адреса" FromRole="Заявки" ToRole="Адреса" />
           <NavigationProperty Name="ВидыРабот" Relationship="Self.FK_Заявки_ВидыРабот" FromRole="Заявки" ToRole="ВидыРабот" />
           <NavigationProperty Name="Клиенты" Relationship="Self.FK_Заявки_Клиенты" FromRole="Заявки" ToRole="Клиенты" />
           <NavigationProperty Name="Пользователи" Relationship="Self.FK_Заявки_Пользователи" FromRole="Заявки" ToRole="Пользователи" />
@@ -337,18 +300,6 @@
           <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Заявки" Relationship="Self.FK_Заявки_СтатусРаботы" FromRole="СтатусРаботы" ToRole="Заявки" />
         </EntityType>
-        <Association Name="FK_Заявки_Адреса">
-          <End Role="Адреса" Type="Self.Адреса" Multiplicity="1" />
-          <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Адреса">
-              <PropertyRef Name="IDАдреса" />
-            </Principal>
-            <Dependent Role="Заявки">
-              <PropertyRef Name="IDАдреса" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Заявки_ВидыРабот">
           <End Role="ВидыРабот" Type="Self.ВидыРабот" Multiplicity="1" />
           <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
@@ -434,7 +385,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ДипломEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Адреса" EntityType="Self.Адреса" />
           <EntitySet Name="ВидыРабот" EntityType="Self.ВидыРабот" />
           <EntitySet Name="Заявки" EntityType="Self.Заявки" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
@@ -443,10 +393,6 @@
           <EntitySet Name="Работники" EntityType="Self.Работники" />
           <EntitySet Name="Роли" EntityType="Self.Роли" />
           <EntitySet Name="СтатусРаботы" EntityType="Self.СтатусРаботы" />
-          <AssociationSet Name="FK_Заявки_Адреса" Association="Self.FK_Заявки_Адреса">
-            <End Role="Адреса" EntitySet="Адреса" />
-            <End Role="Заявки" EntitySet="Заявки" />
-          </AssociationSet>
           <AssociationSet Name="FK_Заявки_ВидыРабот" Association="Self.FK_Заявки_ВидыРабот">
             <End Role="ВидыРабот" EntitySet="ВидыРабот" />
             <End Role="Заявки" EntitySet="Заявки" />
@@ -482,16 +428,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище ДипломModelContainer" CdmEntityContainer="ДипломEntities">
-          <EntitySetMapping Name="Адреса">
-            <EntityTypeMapping TypeName="ДипломModel.Адреса">
-              <MappingFragment StoreEntitySet="Адреса">
-                <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
-                <ScalarProperty Name="Города" ColumnName="Города" />
-                <ScalarProperty Name="Улица" ColumnName="Улица" />
-                <ScalarProperty Name="НомерДома" ColumnName="НомерДома" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ВидыРабот">
             <EntityTypeMapping TypeName="ДипломModel.ВидыРабот">
               <MappingFragment StoreEntitySet="ВидыРабот">
@@ -511,7 +447,7 @@
                 <ScalarProperty Name="IDСтатуса" ColumnName="IDСтатуса" />
                 <ScalarProperty Name="IDВида" ColumnName="IDВида" />
                 <ScalarProperty Name="IDРаботника" ColumnName="IDРаботника" />
-                <ScalarProperty Name="IDАдреса" ColumnName="IDАдреса" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
                 <ScalarProperty Name="IDПользователя" ColumnName="IDПользователя" />
               </MappingFragment>
             </EntityTypeMapping>
