@@ -77,7 +77,7 @@
                 <TextBlock x:Name="UserRole" Text="testRole" TextTrimming="CharacterEllipsis" Margin="0 0 50 0"/>
             </StackPanel>
         </Border>
-      
+
         <StackPanel Width="200"
                     Background="#060531"
                     Grid.Row="1"
@@ -178,11 +178,13 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-        <Frame NavigationUIVisibility="Hidden"
-               Margin="10,10,10,10"
-               Grid.Row="1"
-               Grid.Column="1"
-               Grid.ColumnSpan="2"
-               x:Name="MainWindowFrame" />
+        <ScrollViewer  Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2">
+            <Frame NavigationUIVisibility="Hidden"
+                    Margin="10,10,10,10"
+                     x:Name="MainWindowFrame" />
+        </ScrollViewer>
+
     </Grid>
 </Window>

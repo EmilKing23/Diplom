@@ -8,7 +8,7 @@
 
         public static User UserInfo;  
 
-       public  enum UserTypes
+       public enum UserTypes
         {
             Admin,
             Employer,

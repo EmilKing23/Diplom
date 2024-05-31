@@ -102,6 +102,7 @@ namespace DiplomKarakuyumjyan
 
         private void ServicesComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if (ServicesComboBox.SelectedItem is null) return;
             ListBoxClients.ItemsSource = ReportsList.Where(_ => _.Order.Service.Equals(((DiplomKarakuyumjyan.ВидыРабот)ServicesComboBox.SelectedValue).Наименование));
             DropFilterButtonBorder.Visibility = Visibility.Visible;
         }

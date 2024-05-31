@@ -115,3 +115,5 @@ E:\Diplom\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 E:\Diplom\obj\Debug\App.baml
 E:\Diplom\obj\Debug\Pages\PersonalPage.g.cs
 E:\Diplom\obj\Debug\Pages\PersonalPage.baml
+E:\Diplom\obj\Debug\Pages\ManagerRequestsPage.g.cs
+E:\Diplom\obj\Debug\Pages\ManagerRequestsPage.baml
