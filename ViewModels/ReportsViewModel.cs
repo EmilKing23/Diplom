@@ -52,8 +52,8 @@ namespace DiplomKarakuyumjyan
                     },
                     Order = new Orders
                     {
-                        DateEnd = searchOrder.ПлановаяДатаОкончанияРабот.Value.ToString(),
-                        DateStart = searchOrder.ПлановаяДатаНачалаРабот.Value.ToString(),
+                        DateEnd = searchOrder.ПлановаяДатаОкончанияРабот.Value,
+                        DateStart = searchOrder.ПлановаяДатаНачалаРабот.Value,
                         Status = searchOrder.СтатусРаботы.Наименование,
                         Service = context.ВидыРабот.First(_=>_.IDВида.Equals(searchOrder.IDВида)).Наименование,
                     }

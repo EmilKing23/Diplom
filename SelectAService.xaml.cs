@@ -58,6 +58,10 @@ namespace DiplomKarakuyumjyan
 
         private void btnCreatRequest_Click(object sender, RoutedEventArgs e)
         {
+            if(UserConfiguration.Usertype == UserConfiguration.UserTypes.Manager)
+            {
+
+            }
             CreateRequestPage page = new CreateRequestPage();
             MainWindowFrame.Content = page;
         }

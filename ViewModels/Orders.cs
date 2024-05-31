@@ -22,11 +22,11 @@ namespace DiplomKarakuyumjyan.ViewModels
         public string ManagerName { get; set; }
         public string Status { get; set; }
         public string Service { get; set; }
-        public string DateStart { get; set; }
+        public DateTime DateStart { get; set; }
         public string Email { get; set; }
         public string Adress { get; set; }
         public string ClientName { get; set; }
-        public string DateEnd { get; set; }
+        public DateTime DateEnd { get; set; }
         public string Phone { get; set; }
 
 

@@ -74,6 +74,8 @@ namespace DiplomKarakuyumjyan.Pages
             if (string.IsNullOrEmpty(search)) ListBoxClients.ItemsSource = ClientsList;
             ClientsListSearch = ClientsList.Where(_ =>
             _.Имя.Contains(search) ||
+             _.Фамилия.Contains(search) ||
+              _.Отчество.Contains(search) ||
             _.НомерТелефона.Contains(search) ||
             _.Почта.Contains(search)
             );
@@ -108,12 +110,12 @@ namespace DiplomKarakuyumjyan.Pages
             }
             string phone = ClientPhoneTxtBox.Text;
             bool IsPhoneValid = Int64.TryParse(phone, out var validPhone);
-            if(IsPhoneValid== false|| phone.Length!=10 )
+            if (IsPhoneValid == false || phone.Length != 10)
             {
                 MessageBox.Show("В поле 'Номер телефона' указано неверное значение!");
                 return;
             }
-             Клиенты clients = new Клиенты
+            Клиенты clients = new Клиенты
             {
                 Имя = ClientNameTxtBox.Text,
                 Фамилия = ClientSurNameTxtBox.Text,
@@ -123,7 +125,7 @@ namespace DiplomKarakuyumjyan.Pages
 
             };
             var existItem = context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(clients.НомерТелефона) || _.Почта.Equals(ClientEmailTxtBox.Text));
-            if(existItem is null)
+            if (existItem is null)
             {
                 context.Клиенты.Add(clients);
                 try
@@ -144,9 +146,6 @@ namespace DiplomKarakuyumjyan.Pages
             {
                 MessageBox.Show("В базе уже есть клиент с таким номером или почтой!");
             }
-
-
-
         }
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)

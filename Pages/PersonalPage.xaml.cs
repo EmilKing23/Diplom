@@ -55,8 +55,8 @@ namespace DiplomKarakuyumjyan.Pages
                     Service = service,
                     Status = status,
                     ClientName = $"{client.Фамилия} {client.Имя} {client.Отчество}",
-                    DateStart = item.ПлановаяДатаНачалаРабот.ToString(),
-                    DateEnd = item.ПлановаяДатаОкончанияРабот.ToString(),
+                    DateStart = (DateTime)item.ПлановаяДатаНачалаРабот,
+                    DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
                     Phone = client.НомерТелефона.ToString(),
                     Email = client.Почта.ToString(),
                 });
@@ -83,9 +83,10 @@ namespace DiplomKarakuyumjyan.Pages
 
         private void StatusChangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var comboBox = sender as ComboBox;
             if (SelectedOrder is null) return;
-            StatusChange(SelectedOrder, StatusChangeComboBox.SelectedItem as СтатусРаботы);
-            StatusChangeComboBox.SelectedItem = null;
+            StatusChange(SelectedOrder, comboBox.SelectedItem as СтатусРаботы);
+            comboBox.SelectedItem = null;
         }
 
         private void InProgressListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,6 +111,7 @@ namespace DiplomKarakuyumjyan.Pages
         }
 
         public Orders SelectedOrder { get; set; }
+       
 
         private void StatusChange(Orders orders, СтатусРаботы value)
         {
@@ -140,7 +142,6 @@ namespace DiplomKarakuyumjyan.Pages
             }
             if (MessageBox.Show("Отметить заявку как выполненнную?", "Отчёт добавлен", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-
                 entities.Заявки.First(_ => _.IDЗаявки.Equals(SelectedOrder.Id)).IDСтатуса = 4;
                 entities.SaveChanges();
                 SetItemSources();
@@ -151,8 +152,9 @@ namespace DiplomKarakuyumjyan.Pages
         {
             Отчеты report = entities.Отчеты.FirstOrDefault(_ => _.IDОтчета.Equals(SelectedOrder.Id));
             entities.Отчеты.Remove(report);
-
         }
+
+      
     }
 }
 

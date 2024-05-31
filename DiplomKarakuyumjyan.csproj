@@ -169,6 +169,9 @@
     <Compile Include="Pages\CreateRequestPage.xaml.cs">
       <DependentUpon>CreateRequestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ManagerRequestsPage.xaml.cs">
+      <DependentUpon>ManagerRequestsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>
@@ -237,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CreateRequestPage.xaml" />
+    <Page Include="Pages\ManagerRequestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PersonalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

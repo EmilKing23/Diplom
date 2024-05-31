@@ -19,41 +19,19 @@ namespace DiplomKarakuyumjyan
         public ReportsPage()
         {
             InitializeComponent();
+            DropFilterButtonBorder.Visibility = Visibility.Hidden;
             ServicesCollection = new List<ВидыРабот>();
-            OrderDateFilter.SelectedDate = DateTime.Now; 
+            OrderDateFilter.SelectedDate = DateTime.Now;
             foreach (var item in Context.ВидыРабот)
             {
                 ServicesCollection.Add(item);
             }
             ServicesComboBox.ItemsSource = ServicesCollection;
-             SelectedReport = new Reports
-            {
-                Id = 23,
-                Client = new Clients
-                {
-                    Adress = "Ул. Пушкина дом 14",
-                    Name = "Остапенко Анатолий",
-                    Phone = "+79882034455"
-                },
-                Order = new Orders
-                {
-                    DateEnd="10.02.2024",
-                    DateStart = "2.02.2024",
-                    Status = "Выполнено",
-                    ManagerName = "Валентина Стрыкало",
-                    EmployerName = "Максим Коржев",
-                    Service = "Межевание земельного участка"
-                }
-
-                 
-            };
-
             Заявки searchOrder;
             Клиенты client;
             Работники employer;
 
             ReportsList = new ObservableCollection<Reports>();
-            ReportsList.Add(SelectedReport);
             foreach (var item in Context.Отчеты)
             {
                 searchOrder = Context.Заявки.First(_ => _.IDЗаявки.Equals(item.IDЗаявки));
@@ -64,19 +42,24 @@ namespace DiplomKarakuyumjyan
                 {
                     Id = item.IDОтчета,
                     Description = item.ОписаниеРабот,
+                    Employer = $"{item.Заявки.Работники.Фамилия} {item.Заявки.Работники.Имя} {item.Заявки.Работники.Отчество}",
+
                     Client = new Clients()
                     {
                         Name = $"{client.Фамилия} {client.Имя} {client.Отчество}",
-
-                        Phone = $"{client.НомерТелефона}"
+                        Adress = item.Заявки.Адрес,
+                        Phone = $"{client.НомерТелефона}",
                     },
                     Order = new Orders
                     {
-                        DateEnd = searchOrder.ПлановаяДатаОкончанияРабот.Value.ToString(),
-                        DateStart = searchOrder.ПлановаяДатаНачалаРабот.Value.ToString(),
+                        DateEnd = (DateTime)searchOrder.ПлановаяДатаОкончанияРабот,
+                        DateStart = (DateTime)searchOrder.ПлановаяДатаНачалаРабот,
                         Status = searchOrder.СтатусРаботы.Наименование,
+                        Service = searchOrder.ВидыРабот.Наименование,
+                        EmployerName = $"{searchOrder.Работники.Фамилия} {searchOrder.Работники.Имя} {searchOrder.Работники.Отчество}",
+                        ManagerName = $"{searchOrder.Пользователи.Фамилия} {searchOrder.Пользователи.Имя} {searchOrder.Пользователи.Отчество}",
+                        Email = searchOrder.Клиенты.Почта
                     }
-
                 });
             }
             ListBoxClients.ItemsSource = ReportsList.ToList();
@@ -85,13 +68,13 @@ namespace DiplomKarakuyumjyan
 
         public Reports SelectedReport { get; set; }
 
-        public ObservableCollection<Reports> DisplaySelectedReportCollection {get;set;}
+        public ObservableCollection<Reports> DisplaySelectedReportCollection { get; set; }
 
         public ObservableCollection<Reports> ReportsList { get; set; }
 
         public class Reports
         {
-
+            public string Service { get; set; }
             public int Id { get; set; }
             public string Description { get; set; }
             public Orders Order { get; set; }
@@ -104,7 +87,64 @@ namespace DiplomKarakuyumjyan
         {
             SelectedReport = ListBoxClients.SelectedItem as Reports;
             SelectedReportDisplay.ItemsSource = DisplaySelectedReportCollection = new ObservableCollection<Reports> { SelectedReport };
+        }
 
+        private void TextBoxSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TextBoxSearch.Text)) ListBoxClients.ItemsSource = ReportsList;
+            ListBoxClients.ItemsSource = ReportsList.Where(_ =>
+            _.Client.Name.Contains(TextBoxSearch.Text) ||
+            _.Client.Name.Contains(TextBoxSearch.Text) ||
+            _.Order.EmployerName.Contains(TextBoxSearch.Text) ||
+            _.Order.Email.Contains(TextBoxSearch.Text));
+            DropFilterButtonBorder.Visibility = Visibility.Visible;
+        }
+
+        private void ServicesComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            ListBoxClients.ItemsSource = ReportsList.Where(_ => _.Order.Service.Equals(((DiplomKarakuyumjyan.ВидыРабот)ServicesComboBox.SelectedValue).Наименование));
+            DropFilterButtonBorder.Visibility = Visibility.Visible;
+        }
+
+        private void DropFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServicesComboBox.SelectedItem = null;
+            TextBoxSearch.Text = string.Empty;
+            OrderDateFilter.SelectedDate = null;
+            ListBoxClients.ItemsSource = ReportsList;
+            DropFilterButtonBorder.Visibility = Visibility.Hidden;
+        }
+
+        private void OrderDateFilter_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (ReportsList is null) return;
+            if (OrderDateFilterEnd.SelectedDate is null)
+            {
+                ListBoxClients.ItemsSource = ReportsList.Where(_ => _.Order.DateStart.Equals(OrderDateFilter.SelectedDate.ToString()));
+                DropFilterButtonBorder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                List<Reports> list = ReportsList.Where(_ => _.Order.DateStart >= OrderDateFilter.SelectedDate || _.Order.DateStart.Equals(OrderDateFilter.SelectedDate) && _.Order.DateEnd <= OrderDateFilterEnd.SelectedDate || _.Order.DateEnd.Equals(OrderDateFilterEnd.SelectedDate)).ToList();
+                DropFilterButtonBorder.Visibility = Visibility.Visible;
+                ListBoxClients.ItemsSource = list;
+            }
+        }
+
+        private void OrderDateFilterEnd_SelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (ReportsList is null) return;
+            if (OrderDateFilterEnd.SelectedDate is null)
+            {
+                ListBoxClients.ItemsSource = ReportsList.Where(_ => _.Order.DateStart.Equals(OrderDateFilter.SelectedDate.ToString()));
+                DropFilterButtonBorder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                List<Reports> list = ReportsList.Where(_ => _.Order.DateStart >= OrderDateFilter.SelectedDate || _.Order.DateStart.Equals(OrderDateFilter.SelectedDate) && _.Order.DateEnd <= OrderDateFilterEnd.SelectedDate || _.Order.DateEnd.Equals(OrderDateFilterEnd.SelectedDate)).ToList();
+                DropFilterButtonBorder.Visibility = Visibility.Visible;
+                ListBoxClients.ItemsSource = list;
+            }
         }
     }
 }

@@ -155,7 +155,7 @@
                         </Border>
                       
                     </Grid>
-                    <Grid VerticalAlignment="Top" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  >
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.RowSpan="3" Grid.Column="1"  >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>

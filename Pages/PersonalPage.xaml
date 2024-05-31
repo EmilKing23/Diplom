@@ -49,9 +49,11 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <Label Content="Сменить статус:" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0"/>
             <Border Margin="5" Grid.Column="3" Style="{StaticResource ContentBorder}">
-                <ComboBox x:Name="StatusChangeComboBox" ItemsSource="{Binding StatusList}" DisplayMemberPath="Наименование" SelectionChanged="StatusChangeComboBox_SelectionChanged"></ComboBox>
+                <ComboBox  x:Name="StatusChangeComboBox" 
+                           ItemsSource="{Binding StatusList}"
+                           DisplayMemberPath="Наименование" 
+                           SelectionChanged="StatusChangeComboBox_SelectionChanged"/>
             </Border>
             <Label Grid.Row="1" Content="Новые" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
             <Label Grid.Row="1" Grid.Column="1" Content="В работе" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
@@ -85,7 +87,9 @@
                                             <TextBlock Text="-"/>
                                             <TextBlock Text="{Binding DateEnd}"/>
                                         </StackPanel>
+
                                     </StackPanel>
+
                                 </Expander>
                             </StackPanel>
                         </DataTemplate>
@@ -134,13 +138,11 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Id}"/>
                                     <TextBlock Margin="10,0" Text="{Binding Service}"/>
                                 </StackPanel>
                                 <Expander>
-
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
@@ -167,7 +169,6 @@
                                                       FontFamily="Montserrat"
                                                        Cursor="Hand"                                     
                                                        Click="CreateReport_Click">
-
                                                 <Button.Style>
                                                     <Style TargetType="Button">
                                                         <Setter Property="Background" Value="#462AD8" />
@@ -188,7 +189,6 @@
                                                         </Border>
                                                     </ControlTemplate>
                                                 </Button.Template>
-                                              
                                             </Button>
                                             <Button x:Name="RemoveReport" Click="RemoveReport_Click" Content="X" 
                                                     BorderThickness="0"
@@ -198,7 +198,7 @@
                                                     Foreground="Red"
                                                     Background="Transparent"/>
                                         </StackPanel>
-                                      
+
                                     </StackPanel>
                                 </Expander>
                             </StackPanel>
@@ -217,7 +217,6 @@
                                     <TextBlock Margin="10,0" Text="{Binding Service}"/>
                                 </StackPanel>
                                 <Expander>
-
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
@@ -243,8 +242,6 @@
                 </ListBox>
             </ScrollViewer>
             <GridSplitter Grid.Column="3" Grid.Row="2" ShowsPreview="False"  Width="2" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-
         </Grid>
-
     </Border>
 </Page>

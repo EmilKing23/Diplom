@@ -21,8 +21,6 @@ namespace DiplomKarakuyumjyan
             ClientsFrame.Content = clientsPage;
             FormCollections();
 
-
-
         }
 
         private void FormCollections()
