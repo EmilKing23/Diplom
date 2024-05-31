@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -146,6 +147,20 @@ namespace DiplomKarakuyumjyan
                 DropFilterButtonBorder.Visibility = Visibility.Visible;
                 ListBoxClients.ItemsSource = list;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                 File.OpenRead(SelectedReport.Description);
+                
+            }
+            catch
+            {
+                MessageBox.Show("Файл не найден по указанному пути!");
+            }
+
         }
     }
 }

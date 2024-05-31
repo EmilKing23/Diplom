@@ -30,6 +30,7 @@ namespace DiplomKarakuyumjyan.Pages
             InitializeComponent();
             OrdersList = new List<Orders>();
             SetItemSources();
+            DropFilterButtonBorder.Visibility = Visibility.Hidden;
 
         }
 
@@ -42,37 +43,70 @@ namespace DiplomKarakuyumjyan.Pages
             WaitReportOrdersList = new List<Orders>();
             DoneOrdersList = new List<Orders>();
             OrdersList = new List<Orders>();
-            foreach (var item in entities.Заявки.Where(_ => _.IDРаботника.Equals(UserConfiguration.UserInfo.Id)))
+            if(UserConfiguration.Usertype == UserConfiguration.UserTypes.Manager|| UserConfiguration.Usertype == UserConfiguration.UserTypes.Admin)
             {
-                var service = entities.ВидыРабот.FirstOrDefault(_ => _.IDВида.Equals(item.IDВида)).Наименование;
-                var status = entities.СтатусРаботы.FirstOrDefault(_ => _.IDСтатуса.Equals(item.IDСтатуса)).Наименование;
-                var client = entities.Клиенты.FirstOrDefault(_ => _.IDКлиента.Equals(item.IDКлиента));
-                OrdersList.Add(new Orders
+                foreach (var item in entities.Заявки)
                 {
-                    Id = item.IDЗаявки,
-                    StatusId = item.IDСтатуса,
-                    Adress = item.Адрес,
-                    Service = service,
-                    Status = status,
-                    ClientName = $"{client.Фамилия} {client.Имя} {client.Отчество}",
-                    DateStart = (DateTime)item.ПлановаяДатаНачалаРабот,
-                    DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
-                    Phone = client.НомерТелефона.ToString(),
-                    Email = client.Почта.ToString(),
-                });
+                    var service = entities.ВидыРабот.FirstOrDefault(_ => _.IDВида.Equals(item.IDВида)).Наименование;
+                    var status = entities.СтатусРаботы.FirstOrDefault(_ => _.IDСтатуса.Equals(item.IDСтатуса)).Наименование;
+                    var client = entities.Клиенты.FirstOrDefault(_ => _.IDКлиента.Equals(item.IDКлиента));
+                    OrdersList.Add(new Orders
+                    {
+                        Id = item.IDЗаявки,
+                        StatusId = item.IDСтатуса,
+                        Adress = item.Адрес,
+                        Service = service,
+                        Status = status,
+                        ClientName = $"{client.Фамилия} {client.Имя} {client.Отчество}",
+                        DateStart = (DateTime)item.ПлановаяДатаНачалаРабот,
+                        DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
+                        Phone = client.НомерТелефона.ToString(),
+                        Email = client.Почта.ToString(),
+                    });
 
 
+                }
             }
-            TODOList = OrdersList.FindAll(_ => _.StatusId.Equals(1)).ToList();
-            InProgressList = OrdersList.FindAll(_ => _.StatusId.Equals(2)).ToList();
-            WaitReportOrdersList = OrdersList.FindAll(_ => _.StatusId.Equals(3)).ToList();
-            DoneOrdersList = OrdersList.FindAll(_ => _.StatusId.Equals(4)).ToList();
+            else
+            {
+                foreach (var item in entities.Заявки.Where(_ => _.IDРаботника.Equals(UserConfiguration.UserInfo.Id)))
+                {
+                    var service = entities.ВидыРабот.FirstOrDefault(_ => _.IDВида.Equals(item.IDВида)).Наименование;
+                    var status = entities.СтатусРаботы.FirstOrDefault(_ => _.IDСтатуса.Equals(item.IDСтатуса)).Наименование;
+                    var client = entities.Клиенты.FirstOrDefault(_ => _.IDКлиента.Equals(item.IDКлиента));
+                    OrdersList.Add(new Orders
+                    {
+                        Id = item.IDЗаявки,
+                        StatusId = item.IDСтатуса,
+                        Adress = item.Адрес,
+                        Service = service,
+                        Status = status,
+                        ClientName = $"{client.Фамилия} {client.Имя} {client.Отчество}",
+                        DateStart = (DateTime)item.ПлановаяДатаНачалаРабот,
+                        DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
+                        Phone = client.НомерТелефона.ToString(),
+                        Email = client.Почта.ToString(),
+                    });
+
+
+                }
+            }
+            UpdateSources(OrdersList);
+
+        }
+
+        private void UpdateSources(List<Orders> orders)
+        {
+            TODOList = orders.FindAll(_ => _.StatusId.Equals(1)).ToList();
+            InProgressList = orders.FindAll(_ => _.StatusId.Equals(2)).ToList();
+            WaitReportOrdersList = orders.FindAll(_ => _.StatusId.Equals(3)).ToList();
+            DoneOrdersList = orders.FindAll(_ => _.StatusId.Equals(4)).ToList();
             StatusChangeComboBox.ItemsSource = entities.СтатусРаботы.ToList();
             TODOListBox.ItemsSource = TODOList;
             InProgressListBox.ItemsSource = InProgressList;
             WaitReportListBox.ItemsSource = WaitReportOrdersList;
             DoneListBox.ItemsSource = DoneOrdersList;
-
+            ServicetypeChangeComboBox.ItemsSource = entities.ВидыРабот.ToList();
         }
         public List<Orders> OrdersList { get; set; } = new List<Orders>();
         public List<Orders> TODOList { get; set; } = new List<Orders>();
@@ -154,7 +188,32 @@ namespace DiplomKarakuyumjyan.Pages
             entities.Отчеты.Remove(report);
         }
 
-      
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TextBoxSearch.Text)) UpdateSources(OrdersList);
+            List<Orders> list = OrdersList.Where(_ =>
+            _.ClientName.Contains(TextBoxSearch.Text) ||
+            _.Adress.Contains(TextBoxSearch.Text) ||
+            _.Phone.Contains(TextBoxSearch.Text) ||
+            _.Email.Contains(TextBoxSearch.Text)).ToList();
+            UpdateSources(list);
+            DropFilterButtonBorder.Visibility = Visibility.Visible;
+        }
+
+        private void ServicetypeChangeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ServicetypeChangeComboBox.SelectedItem is null) return;
+            DropFilterButtonBorder.Visibility = Visibility.Visible;
+            List<Orders> list = OrdersList.Where(_ => _.Service.Equals(((DiplomKarakuyumjyan.ВидыРабот)ServicetypeChangeComboBox.SelectedValue).Наименование)).ToList();
+            UpdateSources(list);
+        }
+
+        private void DropFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateSources(OrdersList);
+            DropFilterButtonBorder.Visibility = Visibility.Hidden ;
+            ServicetypeChangeComboBox.SelectedItem = null;
+        }
     }
 }
 

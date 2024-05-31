@@ -117,7 +117,7 @@
                 </Border>
             </ScrollViewer>
             <Border Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Background="White" CornerRadius="10" Padding="20" Margin="20">
-                <ListView  x:Name="SelectedReportDisplay" ItemsSource="{Binding DisplaySelectedReportCollection,Mode=OneWay}" >
+                <ListView   x:Name="SelectedReportDisplay" ItemsSource="{Binding DisplaySelectedReportCollection,Mode=OneWay}" >
                     <ListView.ItemTemplate>
                         <ItemContainerTemplate>
                             <StackPanel Margin="20">
@@ -136,7 +136,8 @@
                                 <TextBlock Text="Менеджер:"/>
                                 <TextBlock  Text="{Binding Order.ManagerName}" FontSize="16"></TextBlock>
                                 <TextBlock Text="Отчет:"/>
-                                <TextBlock  Text="{Binding Description}" FontSize="18"/>
+                                <Button  Content="{Binding Description}" BorderThickness="0" Background="Transparent" FontStyle="Oblique" Foreground="Blue" Click="Button_Click" FontSize="18"/>
+                                
                             </StackPanel>
 
                         </ItemContainerTemplate>

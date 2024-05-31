@@ -35,7 +35,7 @@
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -49,12 +49,43 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <Border Margin="5" Grid.Column="3" Style="{StaticResource ContentBorder}">
-                <ComboBox  x:Name="StatusChangeComboBox" 
-                           ItemsSource="{Binding StatusList}"
-                           DisplayMemberPath="Наименование" 
-                           SelectionChanged="StatusChangeComboBox_SelectionChanged"/>
+            <StackPanel Grid.Column="0">
+                <Label Content="Поиск:" HorizontalAlignment="Center"></Label>
+                <Border MinHeight="40"  Background="White" Margin="10,0" CornerRadius="20">
+                    <StackPanel Orientation="Horizontal" Margin="10,0" VerticalAlignment="Center">
+                        <TextBox Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"   BorderThickness="0" x:Name="TextBoxSearch"  TextChanged="TextBoxSearch_TextChanged"  MinWidth="150">
+                            <TextBox.Style>
+                                <Style>
+
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="3">
+                <Label Content="Сменить статус:" HorizontalAlignment="Center" ></Label>
+                <Border Margin="10,0"  Style="{StaticResource ContentBorder}">
+
+                    <ComboBox  x:Name="StatusChangeComboBox" 
+                                ItemsSource="{Binding StatusList}"
+                                DisplayMemberPath="Наименование" 
+                                SelectionChanged="StatusChangeComboBox_SelectionChanged"/>
+                </Border>
+            </StackPanel>
+            <Border Margin="20" HorizontalAlignment="Center" x:Name="DropFilterButtonBorder"   Grid.Column="1"    Style="{StaticResource ContentBorder}">
+                <Button Content="Сбросить фильтры"  x:Name="DropFilterButton" Click="DropFilterButton_Click" Background="Transparent"  BorderThickness="0"/>
             </Border>
+            <StackPanel Grid.Column="2" >
+                <Label Content="Соритровать по услуге" HorizontalAlignment="Center" ></Label>
+                <Border Margin="10,0"  Style="{StaticResource ContentBorder}">
+                    <ComboBox  x:Name="ServicetypeChangeComboBox" 
+                           ItemsSource="{Binding ServiceList}"
+                           DisplayMemberPath="Наименование" 
+                           SelectionChanged="ServicetypeChangeComboBox_SelectionChanged"/>
+                </Border>
+                
+            </StackPanel>
             <Label Grid.Row="1" Content="Новые" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
             <Label Grid.Row="1" Grid.Column="1" Content="В работе" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
             <Label Grid.Row="1" Grid.Column="2" Content="Ждут отчета" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>

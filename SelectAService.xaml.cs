@@ -43,8 +43,6 @@ namespace DiplomKarakuyumjyan
                         btnCreatRequest.Visibility = Visibility.Hidden;
                         btnReports.Visibility = Visibility.Hidden;
                         btnClients.Visibility = Visibility.Hidden;
-
-
                     }
                     break;
             };
