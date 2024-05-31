@@ -3,6 +3,7 @@ using DiplomKarakuyumjyan.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
@@ -153,8 +154,7 @@ namespace DiplomKarakuyumjyan
         {
             try
             {
-                 File.OpenRead(SelectedReport.Description);
-                
+                Process.Start(SelectedReport.Description);
             }
             catch
             {
