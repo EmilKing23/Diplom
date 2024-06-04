@@ -62,6 +62,7 @@ namespace DiplomKarakuyumjyan.Pages
                         DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
                         Phone = client.НомерТелефона.ToString(),
                         Email = client.Почта.ToString(),
+                        EmployerName = $"{item.Работники.Фамилия} {item.Работники.Имя}  {item.Работники.Отчество}"
                     });
 
 
@@ -82,13 +83,12 @@ namespace DiplomKarakuyumjyan.Pages
                         Service = service,
                         Status = status,
                         ClientName = $"{client.Фамилия} {client.Имя} {client.Отчество}",
-                        DateStart = (DateTime)item.ПлановаяДатаНачалаРабот,
-                        DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот,
+                        DateStart = (DateTime)item.ПлановаяДатаНачалаРабот.Value.Date,
+                        DateEnd = (DateTime)item.ПлановаяДатаОкончанияРабот.Value.Date,
                         Phone = client.НомерТелефона.ToString(),
                         Email = client.Почта.ToString(),
+                        EmployerName = $"{item.Работники.Фамилия} {item.Работники.Имя}  {item.Работники.Отчество}"
                     });
-
-
                 }
             }
             UpdateSources(OrdersList);

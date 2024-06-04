@@ -25,14 +25,13 @@ namespace DiplomKarakuyumjyan
 
         private void FormCollections()
         {
-            foreach (var item in context.Работники)
+            foreach (var item in context.Пользователи.Where(_=>_.Роли.Наименование.Equals("Сотрудник")))
             {
-                var count = context.Заявки.Where(_ => _.IDРаботника.Equals(item.IDРаботника)).Count();
+                var count = context.Заявки.Where(_ => _.IDПользователя.Equals(item.IDПользователя)).Count();
                 EmployersCollection.Add(new Employers
                 {
-                    Id = item.IDРаботника,
+                    Id = item.IDПользователя,
                     Name = $"{item.Фамилия} {item.Имя}",
-                    Vaccancy = item.Должность,
                     OrdersCount = count
                 });
             }
@@ -57,6 +56,10 @@ namespace DiplomKarakuyumjyan
             {
                 var service = ServicesComboBox.SelectedItem as Services;
                 var employer = EmployersComboBox.SelectedItem as Employers;
+                if( clientsPage.SelectedClient is null || DateEndCombo.SelectedDate is null || DateStartCombo.SelectedDate is null || CityTextBox.Text == string.Empty || service.Id == 0 || employer.Id == 0 ) {
+                    MessageBox.Show("Присутствуют пустые поля!");
+                    return;
+                }
                 Заявки order = new Заявки()
                 {
                     IDКлиента = clientsPage.SelectedClient.IDКлиента,

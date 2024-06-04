@@ -102,6 +102,8 @@
                                 <Expander>
 
                                     <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="Исполняющий:"/>
+                                        <TextBlock Text="{Binding EmployerName}"/>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
                                         <TextBlock FontWeight="Bold" Text="Клиент:"/>
@@ -140,6 +142,8 @@
                                 <Expander>
 
                                     <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="Исполняющий:"/>
+                                        <TextBlock Text="{Binding EmployerName}"/>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
                                         <TextBlock FontWeight="Bold" Text="Клиент:"/>
@@ -175,6 +179,8 @@
                                 </StackPanel>
                                 <Expander>
                                     <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="Исполняющий:"/>
+                                        <TextBlock Text="{Binding EmployerName}"/>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
                                         <TextBlock FontWeight="Bold" Text="Клиент:"/>
@@ -221,13 +227,13 @@
                                                     </ControlTemplate>
                                                 </Button.Template>
                                             </Button>
-                                            <Button x:Name="RemoveReport" Click="RemoveReport_Click" Content="X" 
+                                            <!--<Button x:Name="RemoveReport" Click="RemoveReport_Click" Content="X" 
                                                     BorderThickness="0"
                                                     VerticalContentAlignment="Center"
                                                     HorizontalContentAlignment="Center"
                                                     FontSize="22"
                                                     Foreground="Red"
-                                                    Background="Transparent"/>
+                                                    Background="Transparent"/>-->
                                         </StackPanel>
 
                                     </StackPanel>
@@ -249,6 +255,8 @@
                                 </StackPanel>
                                 <Expander>
                                     <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="Исполняющий:"/>
+                                        <TextBlock Text="{Binding EmployerName}"/>
                                         <TextBlock FontWeight="Bold" Text="Услуга:"/>
                                         <TextBlock Text="{Binding Service}"/>
                                         <TextBlock FontWeight="Bold" Text="Клиент:"/>

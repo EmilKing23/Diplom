@@ -94,8 +94,9 @@
                     <Button Content="Сбросить фильтры"  x:Name="DropFilterButton" Click="DropFilterButton_Click" Background="Transparent"  BorderThickness="0"/>
                 </Border>
             </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="1" >
-                <Border Margin="10" CornerRadius="20" Background="White">
+            <Border Margin="10" CornerRadius="20" Background="White" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="1" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto" >
+
                     <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ReportsList}" SelectionChanged="ListBoxClients_SelectionChanged" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -114,8 +115,8 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </Border>
-            </ScrollViewer>
+                </ScrollViewer>
+            </Border>
             <Border Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Background="White" CornerRadius="10" Padding="20" Margin="20">
                 <ListView   x:Name="SelectedReportDisplay" ItemsSource="{Binding DisplaySelectedReportCollection,Mode=OneWay}" >
                     <ListView.ItemTemplate>
