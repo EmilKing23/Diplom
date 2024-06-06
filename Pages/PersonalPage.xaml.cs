@@ -47,6 +47,7 @@ namespace DiplomKarakuyumjyan.Pages
             {
                 foreach (var item in entities.Заявки)
                 {
+                   
                     var service = entities.ВидыРабот.FirstOrDefault(_ => _.IDВида.Equals(item.IDВида)).Наименование;
                     var status = entities.СтатусРаботы.FirstOrDefault(_ => _.IDСтатуса.Equals(item.IDСтатуса)).Наименование;
                     var client = entities.Клиенты.FirstOrDefault(_ => _.IDКлиента.Equals(item.IDКлиента));

@@ -200,7 +200,7 @@
                                         <StackPanel>
                                             <Button x:Name="CreateReport"
                                                       BorderThickness="0"
-                                                      Content="Добавить файл отчета"
+                                                      Content="Добавить отчёт"
                                                        Foreground="White"
                                                       FontSize="20"
                                                       FontFamily="Montserrat"

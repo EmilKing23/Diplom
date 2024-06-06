@@ -94,11 +94,12 @@ namespace DiplomKarakuyumjyan.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             if (string.IsNullOrEmpty(ClientNameTxtBox.Text) ||
-                string.IsNullOrEmpty(ClientSurNameTxtBox.Text) ||
-                string.IsNullOrEmpty(ClientPatronymicNameTxtBox.Text) ||
-                string.IsNullOrEmpty(ClientPhoneTxtBox.Text) ||
-                string.IsNullOrEmpty(ClientEmailTxtBox.Text))
+            string.IsNullOrEmpty(ClientSurNameTxtBox.Text) ||
+            string.IsNullOrEmpty(ClientPatronymicNameTxtBox.Text) ||
+            string.IsNullOrEmpty(ClientPhoneTxtBox.Text) ||
+            string.IsNullOrEmpty(ClientEmailTxtBox.Text))
             {
                 MessageBox.Show("Пустое поле!");
                 return;
@@ -115,36 +116,77 @@ namespace DiplomKarakuyumjyan.Pages
                 MessageBox.Show("В поле 'Номер телефона' указано неверное значение!");
                 return;
             }
-            Клиенты clients = new Клиенты
+            if (!_internalChange)
             {
-                Имя = ClientNameTxtBox.Text,
-                Фамилия = ClientSurNameTxtBox.Text,
-                Отчество = ClientPatronymicNameTxtBox.Text,
-                НомерТелефона = $"+7{validPhone.ToString()}",
-                Почта = ClientEmailTxtBox.Text,
+                Клиенты clients = new Клиенты
+                {
+                    Имя = ClientNameTxtBox.Text,
+                    Фамилия = ClientSurNameTxtBox.Text,
+                    Отчество = ClientPatronymicNameTxtBox.Text,
+                    НомерТелефона = $"+7{validPhone.ToString()}",
+                    Почта = ClientEmailTxtBox.Text,
 
-            };
-            var existItem = context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(clients.НомерТелефона) || _.Почта.Equals(ClientEmailTxtBox.Text));
-            if (existItem is null)
+                };
+                var existItem = context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(clients.НомерТелефона) || _.Почта.Equals(ClientEmailTxtBox.Text));
+                if (existItem is null)
+                {
+                    context.Клиенты.Add(clients);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка при добавлении клиента \nПопробуйте позже");
+                        return;
+                    }
+                    GetClients();
+                    MessageBox.Show("Добавлен клиент ");
+                    return;
+
+                }
+                else
+                {
+                    MessageBox.Show("В базе уже есть клиент с таким номером или почтой!");
+                }
+            }
+            else
             {
-                context.Клиенты.Add(clients);
+                Клиенты clients = new Клиенты
+                {
+                    Имя = ClientNameTxtBox.Text,
+                    Фамилия = ClientSurNameTxtBox.Text,
+                    Отчество = ClientPatronymicNameTxtBox.Text,
+                    НомерТелефона = $"+7{validPhone.ToString()}",
+                    Почта = ClientEmailTxtBox.Text,
+
+                };
+                Клиенты клиенты = ListBoxClients.SelectedItem as Клиенты;
+                context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(клиенты.НомерТелефона) || _.Почта.Equals(клиенты.Почта)).Фамилия = clients.Фамилия;
+                context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(клиенты.НомерТелефона) || _.Почта.Equals(клиенты.Почта)).Отчество = clients.Отчество;
+                context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(клиенты.НомерТелефона) || _.Почта.Equals(клиенты.Почта)).Имя = clients.Имя;
+                context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(клиенты.НомерТелефона) || _.Почта.Equals(клиенты.Почта)).Почта = clients.Почта;
+                context.Клиенты.FirstOrDefault(_ => _.НомерТелефона.Equals(клиенты.НомерТелефона) || _.Почта.Equals(клиенты.Почта)).НомерТелефона = clients.НомерТелефона;
                 try
                 {
                     context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка при добавлении клиента \nПопробуйте позже");
+                    MessageBox.Show(ex.Message, "Ошибка при изменении клиента \nПопробуйте позже");
                     return;
                 }
                 GetClients();
-                MessageBox.Show("Добавлен клиент ");
+                MessageBox.Show("Клиент изменен ");
+                AddClientbutton.Content = "Добавить";
+                _internalChange = false;
+                ClientSurNameTxtBox.Text = string.Empty;
+                ClientNameTxtBox.Text = string.Empty;
+                ClientPhoneTxtBox.Text = string.Empty;
+                ClientEmailTxtBox.Text = string.Empty;
+                ClientPatronymicNameTxtBox.Text = string.Empty;
                 return;
 
-            }
-            else
-            {
-                MessageBox.Show("В базе уже есть клиент с таким номером или почтой!");
             }
         }
 
@@ -156,16 +198,40 @@ namespace DiplomKarakuyumjyan.Pages
                 return;
             }
             var res = MessageBox.Show($"Вы действительно хотите удалить: \n{SelectedUserNameText.Text}? Отменить это действие - невозможно! ", "", MessageBoxButton.YesNo);
-
-            if (res == MessageBoxResult.Yes)
+            try
             {
-                Клиенты клиенты = ListBoxClients.SelectedItem as Клиенты;
-                context.Клиенты.Remove(клиенты);
-                context.SaveChanges();
+                if (res == MessageBoxResult.Yes)
+                {
+                    Клиенты клиенты = ListBoxClients.SelectedItem as Клиенты;
+                    context.Клиенты.Remove(клиенты);
+                    context.SaveChanges();
+                }
+                GetClients();
             }
-            GetClients();
+            catch (Exception)
+            {
+                MessageBox.Show("Клиент не может быть удалён! Клиент содержит заявки");
+            }
 
 
+        }
+        private bool _internalChange;
+        private void ChangeClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedClient is null)
+            {
+                MessageBox.Show("Выберите клиента для изменения!");
+                return;
+            }
+            Клиенты client = ListBoxClients.SelectedItem as Клиенты;
+
+            ClientNameTxtBox.Text = client.Имя;
+            ClientSurNameTxtBox.Text = client.Фамилия;
+            ClientPatronymicNameTxtBox.Text = client.Отчество;
+            ClientEmailTxtBox.Text = client.Почта;
+            ClientPhoneTxtBox.Text = client.НомерТелефона.TrimStart('+', '7');
+            AddClientbutton.Content = "Подтвердить";
+            _internalChange = true;
         }
     }
 }
