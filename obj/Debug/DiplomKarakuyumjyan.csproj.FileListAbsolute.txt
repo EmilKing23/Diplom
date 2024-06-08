@@ -33,8 +33,6 @@ E:\Diplom\obj\Debug\Reports.g.cs
 E:\Diplom\obj\Debug\App.g.cs
 E:\Diplom\obj\Debug\DiplomKarakuyumjyan_MarkupCompile.cache
 E:\Diplom\obj\Debug\DiplomKarakuyumjyan_MarkupCompile.lref
-E:\Diplom\obj\Debug\DiplomKarakuyumjyan.exe
-E:\Diplom\obj\Debug\DiplomKarakuyumjyan.pdb
 E:\Diplom\obj\Debug\Pages\ReportsPage.g.cs
 E:\Diplom\bin\Debug\DiplomKarakuyumjyan.exe.config
 E:\Diplom\bin\Debug\DiplomKarakuyumjyan.exe
@@ -117,3 +115,6 @@ E:\Diplom\obj\Debug\Pages\PersonalPage.g.cs
 E:\Diplom\obj\Debug\Pages\PersonalPage.baml
 E:\Diplom\obj\Debug\Pages\ManagerRequestsPage.g.cs
 E:\Diplom\obj\Debug\Pages\ManagerRequestsPage.baml
+E:\Diplom\obj\Debug\Avalonia\resources
+E:\Diplom\obj\Debug\Avalonia\DiplomKarakuyumjyan.exe
+E:\Diplom\obj\Debug\Avalonia\DiplomKarakuyumjyan.pdb

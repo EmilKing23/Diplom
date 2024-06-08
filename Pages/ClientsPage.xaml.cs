@@ -28,11 +28,13 @@ namespace DiplomKarakuyumjyan.Pages
             InitializeComponent();
             if (UserConfiguration.Usertype == UserConfiguration.UserTypes.Employer)
             {
-                ClientOperations.IsEnabled = false;
+                ClientDeleteOperation.Visibility = Visibility.Hidden;
+                ClientChangeOperation.Visibility = Visibility.Hidden;
             }
             if (UserConfiguration.Usertype == UserConfiguration.UserTypes.Admin)
             {
                 ClientDeleteOperation.Visibility = Visibility.Visible;
+                ClientChangeOperation.Visibility = Visibility.Visible;
             }
             GetClients();
         }
@@ -64,6 +66,8 @@ namespace DiplomKarakuyumjyan.Pages
             SelectedClient = ListBoxClients.SelectedItem as Клиенты;
             if (SelectedClient is null) return;
             SelectedUserNameText.Text = SelectedClient.Имя;
+            SelectedUserSurnNameText.Text = SelectedClient.Фамилия;
+            SelectedUserPatronymicText.Text = SelectedClient.Отчество;
             SelectedUserAdressText.Text = SelectedClient.Почта;
             SelectedUserPhoneText.Text = SelectedClient.НомерТелефона;
         }
@@ -143,7 +147,6 @@ namespace DiplomKarakuyumjyan.Pages
                     GetClients();
                     MessageBox.Show("Добавлен клиент ");
                     return;
-
                 }
                 else
                 {

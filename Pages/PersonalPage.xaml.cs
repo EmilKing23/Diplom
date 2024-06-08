@@ -145,7 +145,7 @@ namespace DiplomKarakuyumjyan.Pages
 
         }
 
-        public Orders SelectedOrder { get; set; }
+        public Orders SelectedOrder { get; set; } 
        
 
         private void StatusChange(Orders orders, СтатусРаботы value)
@@ -155,9 +155,11 @@ namespace DiplomKarakuyumjyan.Pages
             SetItemSources();
         }
 
+
         private void CreateReport_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedOrder is null) return;
+            
+                if (SelectedOrder is null) return;
             Отчеты duplicateOrder = entities.Отчеты.FirstOrDefault(_ => _.IDЗаявки.Equals(SelectedOrder.Id));
             if (duplicateOrder != null)
             {

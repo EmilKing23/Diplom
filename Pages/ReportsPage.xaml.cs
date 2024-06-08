@@ -1,15 +1,11 @@
-﻿using Avalonia.Controls;
-using DiplomKarakuyumjyan.ViewModels;
+﻿using DiplomKarakuyumjyan.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using static DiplomKarakuyumjyan.Pages.ClientsPage;
 
 namespace DiplomKarakuyumjyan

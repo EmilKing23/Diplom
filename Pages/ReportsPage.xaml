@@ -44,9 +44,17 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Margin="10" Grid.ColumnSpan="4">
+            <TextBlock Text="Отчёты"
+                       Foreground="DarkGray"
+                       FontSize="25"
+                       FontFamily="Montserrat"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0" />
+            <Grid Margin="10" Grid.Row="1" Grid.ColumnSpan="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -54,7 +62,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Border MinHeight="40" Background="White" CornerRadius="20">
+
+                <Border Grid.Row="1" MinHeight="40" Background="White" CornerRadius="20">
                     <StackPanel Orientation="Horizontal" Margin="10,0" VerticalAlignment="Center">
                         <TextBox Background="Transparent" VerticalContentAlignment="Center"  Margin="20,0" BorderThickness="0" x:Name="TextBoxSearch" TextAlignment="Center" TextChanged="TextBoxSearch_TextChanged"  MinWidth="150">
                             <TextBox.Style>
@@ -78,7 +87,7 @@
                         </ComboBox>
                     </Border>
                 </StackPanel>
-               
+
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Column="3">
                     <Label FontSize="16" Content="Дата:" VerticalAlignment="Center"/>
                     <Border Margin="10,0" Grid.Column="3" Style="{StaticResource ContentBorder}">
@@ -88,13 +97,13 @@
                     <Border Margin="10,0" Grid.Column="4" Style="{StaticResource ContentBorder}">
                         <DatePicker IsTodayHighlighted="True" SelectedDateChanged="OrderDateFilterEnd_SelectedDateChanged" x:Name="OrderDateFilterEnd" />
                     </Border>
-                    
+
                 </StackPanel>
                 <Border Margin="0,0" HorizontalAlignment="Left"   Grid.Column="1" x:Name="DropFilterButtonBorder"   Style="{StaticResource ContentBorder}">
                     <Button Content="Сбросить фильтры"  x:Name="DropFilterButton" Click="DropFilterButton_Click" Background="Transparent"  BorderThickness="0"/>
                 </Border>
             </Grid>
-            <Border Margin="10" CornerRadius="20" Background="White" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="1" >
+            <Border Margin="10" CornerRadius="20" Background="White" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="2" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto" >
 
                     <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ReportsList}" SelectionChanged="ListBoxClients_SelectionChanged" >
@@ -117,7 +126,7 @@
                     </ListBox>
                 </ScrollViewer>
             </Border>
-            <Border Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Background="White" CornerRadius="10" Padding="20" Margin="20">
+            <Border Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" Background="White" CornerRadius="10" Padding="20" Margin="20">
                 <ListView   x:Name="SelectedReportDisplay" ItemsSource="{Binding DisplaySelectedReportCollection,Mode=OneWay}" >
                     <ListView.ItemTemplate>
                         <ItemContainerTemplate>
@@ -148,7 +157,7 @@
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
-                               
+
                             </StackPanel>
 
                         </ItemContainerTemplate>

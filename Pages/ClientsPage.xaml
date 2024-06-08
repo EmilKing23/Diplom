@@ -34,11 +34,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition x:Name="ClientOperations" Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label FontSize="18" Content="Клиенты" ></Label>
+            <TextBlock Text="Клиенты"
+           Foreground="DarkGray"
+           FontSize="25"
+           FontFamily="Montserrat"
+           Grid.Column="0"
+           VerticalAlignment="Center"
+           Margin="10,0,0,0" />
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
                 <Border MinHeight="40" Background="AliceBlue" CornerRadius="20" Margin="10">
                     <TextBox Background="Transparent" VerticalContentAlignment="Center"  Margin="20,0" BorderThickness="0" x:Name="TextBoxSearch" TextAlignment="Center" TextChanged="TextBox_TextChanged"  MinWidth="150">
@@ -53,8 +59,8 @@
             </StackPanel>
 
             <Border Margin="10" CornerRadius="20" Background="AliceBlue" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="2" >
-                <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                    <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectionChanged="ListBoxClients_SelectionChanged" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ClientsList, Mode=OneWay}">
+                <ScrollViewer Margin="1,20"  MaxHeight="400" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+                    <ListBox BorderThickness="0" Margin="10"   Background="Transparent"  x:Name="ListBoxClients" SelectionChanged="ListBoxClients_SelectionChanged" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ClientsList, Mode=OneWay}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border CornerRadius="10">
@@ -72,7 +78,11 @@
             <Border Background="AliceBlue" CornerRadius="10" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="20">
                 <StackPanel Margin="20">
                     <TextBlock Text="ФИО:"/>
-                    <TextBlock x:Name="SelectedUserNameText" Text="{Binding  Имя, Mode=OneWay}" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="SelectedUserSurnNameText"  Margin="5" FontSize="18"/>
+                        <TextBlock x:Name="SelectedUserNameText"  Margin="5" FontSize="18"/>
+                        <TextBlock x:Name="SelectedUserPatronymicText" Margin="5" FontSize="18"/>
+                    </StackPanel>
                     <TextBlock Text="Телефон:"/>
                     <TextBlock x:Name="SelectedUserPhoneText" Text="{Binding Телефон, Mode=OneWay}" FontSize="16"></TextBlock>
                     <TextBlock Text="E-mail:"/>
