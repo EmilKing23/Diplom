@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Клиенты"
+            <TextBlock Text="Заявки в работе"
            Foreground="DarkGray"
            FontSize="25"
            FontFamily="Montserrat"
@@ -108,7 +108,6 @@
                                     <TextBlock Margin="10,0" Text="{Binding Service}"/>
                                 </StackPanel>
                                 <Expander>
-
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="Исполняющий:"/>
                                         <TextBlock Text="{Binding EmployerName}"/>
@@ -128,9 +127,7 @@
                                             <TextBlock Text="-"/>
                                             <TextBlock Text="{Binding DateEnd}"/>
                                         </StackPanel>
-
                                     </StackPanel>
-
                                 </Expander>
                             </StackPanel>
                         </DataTemplate>

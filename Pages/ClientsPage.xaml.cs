@@ -60,7 +60,6 @@ namespace DiplomKarakuyumjyan.Pages
             ListBoxClients.ItemsSource = ClientsList;
         }
 
-
         private void ListBoxClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedClient = ListBoxClients.SelectedItem as Клиенты;
@@ -77,11 +76,11 @@ namespace DiplomKarakuyumjyan.Pages
             var search = TextBoxSearch.Text;
             if (string.IsNullOrEmpty(search)) ListBoxClients.ItemsSource = ClientsList;
             ClientsListSearch = ClientsList.Where(_ =>
-            _.Имя.Contains(search) ||
-             _.Фамилия.Contains(search) ||
+              _.Имя.Contains(search) ||
+              _.Фамилия.Contains(search) ||
               _.Отчество.Contains(search) ||
-            _.НомерТелефона.Contains(search) ||
-            _.Почта.Contains(search)
+              _.НомерТелефона.Contains(search) ||
+              _.Почта.Contains(search)
             );
             ClientsListSearch.ToList();
 
@@ -90,9 +89,7 @@ namespace DiplomKarakuyumjyan.Pages
             {
                 labelSearchCount.Content = $"Найдено: {ClientsListSearch.Count()}";
                 ListBoxClients.ItemsSource = ClientsListSearch.ToList();
-
             }
-
         }
 
 

@@ -104,8 +104,7 @@
                 </Border>
             </Grid>
             <Border Margin="10" CornerRadius="20" Background="White" Grid.ColumnSpan="2" MinWidth="50" Grid.Row="2" >
-                <ScrollViewer VerticalScrollBarVisibility="Auto" >
-
+                <ScrollViewer  Margin="1,20"  MaxHeight="400" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"  >
                     <ListBox  BorderThickness="0" Margin="10"  Background="Transparent"  x:Name="ListBoxClients" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding ReportsList}" SelectionChanged="ListBoxClients_SelectionChanged" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>

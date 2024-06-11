@@ -24,6 +24,7 @@ namespace DiplomKarakuyumjyan
             {
                 ServicesCollection.Add(item);
             }
+
             ServicesComboBox.ItemsSource = ServicesCollection;
             Заявки searchOrder;
             Клиенты client;
@@ -35,13 +36,11 @@ namespace DiplomKarakuyumjyan
                 searchOrder = Context.Заявки.First(_ => _.IDЗаявки.Equals(item.IDЗаявки));
                 client = Context.Клиенты.First(_ => _.IDКлиента.Equals(item.Заявки.IDКлиента));
                 employer = Context.Работники.First(_ => _.IDРаботника.Equals(item.Заявки.IDРаботника));
-
                 ReportsList.Add(new Reports()
                 {
                     Id = item.IDОтчета,
                     Description = item.ОписаниеРабот,
                     Employer = $"{item.Заявки.Работники.Фамилия} {item.Заявки.Работники.Имя} {item.Заявки.Работники.Отчество}",
-
                     Client = new Clients()
                     {
                         Name = $"{client.Фамилия} {client.Имя} {client.Отчество}",
